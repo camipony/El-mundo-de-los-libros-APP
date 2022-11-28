@@ -1,0 +1,2 @@
+En esta carpeta estara el codigo del microservicio de eventos y noticias,
+el cual sera desarrollado en .net y postgres

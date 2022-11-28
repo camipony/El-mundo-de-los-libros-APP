@@ -1,0 +1,2 @@
+En esta carpeta estara el codigo del microservicio de los libros, 
+el cual sera desarrollado en express, mongo y firebase
