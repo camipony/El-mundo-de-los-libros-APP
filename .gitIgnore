@@ -1,2 +1,10 @@
-./Backend/node_modules
-./frontend/node_modules
+./Backend/node_modules/
+./Backend/Book_services/node_modules/
+./Backend/Book_services/env
+./Backend/Book_services/env.dist
+./frontend/node_modules/
+node_modules/
+/env
+env
+/env.dist
+env.dist

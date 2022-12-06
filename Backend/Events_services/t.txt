@@ -1,2 +1,2 @@
 En esta carpeta estara el codigo del microservicio de eventos y noticias,
-el cual sera desarrollado en .net y postgres
+el cual sera desarrollado en posiblemente en django, c# o flask y postgres
