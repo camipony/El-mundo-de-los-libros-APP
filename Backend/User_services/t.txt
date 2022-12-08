@@ -1,2 +1,2 @@
 En esta carpeta estara el codigo del microservicio de usuarios,
-el cual sera desarrollado en sprint boot y postgres
+el cual sera desarrollado en sprint boot y postgresql
