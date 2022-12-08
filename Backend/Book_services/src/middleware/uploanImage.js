@@ -7,7 +7,7 @@ const storage = multer({
     limits: 2048 * 2048
 })
 
-const BUCKET = "coders-fap.appspot.com"
+const BUCKET = "mdl-project-e7fa1.appspot.com"
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     storageBucket: BUCKET

@@ -18,7 +18,7 @@ const book = new mongoose.Schema(
             default: "https://i.postimg.cc/XJ9Kyhb9/libros.png"
         },
         precio: {
-            type: Decimal
+            type: mongoose.Decimal128 
         },
         estado: {
             type: String
@@ -28,11 +28,11 @@ const book = new mongoose.Schema(
         },
         fecha_actualizacion: {
             type: Date,
-            default: new Date().now().toISOString()
+            default: new Date().toISOString()
         },
         fecha_creacion: {
             type: Date,
-            default: new Date().now().toISOString()
+            default: new Date().toISOString()
         }
     }
 )
