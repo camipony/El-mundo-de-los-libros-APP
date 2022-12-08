@@ -10,7 +10,7 @@ app.use(express.urlencoded({extended: false}));
 app.use(cors());
 //app.set('view engine', 'ejs');
 
-const book = require('./database/models/Book');
+app.use(require('./routers/bookRouter'));
 
 app.use('/test', (res, req) => {
     res.json("test")

@@ -1,6 +1,21 @@
 const book = require('../database/models/Book');
 
-const get_books = async (res, req) => {
+const get_books = async (req, res) => {
+    try {
+        book.find({}, (err, docs) => {
+            res.json({
+                docs:docs
+            })
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            error: "Ah ocurrido un error"
+        })
+    }
+}
+
+const get_book = async (req, res) => {
     try {
         
     } catch (error) {
@@ -11,20 +26,9 @@ const get_books = async (res, req) => {
     }
 }
 
-const get_book = async (res, req) => {
+const add_book = async (req, res) => {
     try {
-        
-    } catch (error) {
-        console.log(error)
-        res.status(500).json({
-            error: "Ah ocurrido un error"
-        })
-    }
-}
-
-const add_book = async (res, req) => {
-    try {
-        
+        res.json("Imagen subida")
     } catch (error) {
         console.log(error)
         res.status(500).json({
