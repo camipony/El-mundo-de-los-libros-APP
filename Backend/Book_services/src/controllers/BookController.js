@@ -3,8 +3,15 @@ const book = require('../database/models/Book');
 const get_books = async (req, res) => {
     try {
         book.find({}, (err, docs) => {
+            if(err){
+                res.status(400).json({
+                    msg: "Ha ocurrido un error",
+                    error: err
+                })
+                return
+            }
             res.json({
-                docs:docs
+                book:docs
             })
         })
     } catch (error) {
@@ -28,7 +35,35 @@ const get_book = async (req, res) => {
 
 const add_book = async (req, res) => {
     try {
-        res.json("Imagen subida")
+        const {
+            codigo,
+            titulo,
+            descripcion,
+            precio,
+            fecha_publicacion
+        } = req.body;
+        book.create(
+            {
+                codigo,
+                titulo,
+                descripcion,
+                precio,
+                fecha_publicacion
+            },
+            (err, docs) => {
+                if( err ){
+                    res.status(400).json({
+                        msg: "Ha ocurrido un error",
+                        error: err
+                    })
+                    return
+                }
+                res.status(201).json({
+                    msg: "Libro agregado con exito",
+                    data: docs
+                })
+            }
+        )
     } catch (error) {
         console.log(error)
         res.status(500).json({
@@ -39,7 +74,31 @@ const add_book = async (req, res) => {
 
 const change_cover = async (req, res) => {
     try {
-        
+        const codigo = req.params;
+        const portada = req.urlFile;
+        book.findOne(codigo, (err, docs) => {
+            if(err){
+                res.status(400).json({
+                    msg: "Ha ocurrido un error",
+                    error: err
+                })
+                return
+            }
+            docs.portada = portada
+            docs.save((error, docs) => {
+                if(error){
+                    res.status(400).json({
+                        msg: "Ha ocurrido un erro",
+                        error: error
+                    })
+                    return
+                }
+                res.status(200).json({
+                    msg: "Libro actualizado",
+                    book: docs
+                })
+            })
+        } )
     } catch (error) {
         console.log(error)
         res.status(500).json({

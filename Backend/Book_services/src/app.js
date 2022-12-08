@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
+const body_parser = require('body-parser');
 
 const app = express();
 
@@ -9,6 +10,17 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cors());
 //app.set('view engine', 'ejs');
+app.use(
+    body_parser.json({
+        limit: '20mb'
+    })
+)
+app.use(
+    body_parser.urlencoded({
+        limit: '20mb',
+        extended: true
+    })
+)
 
 app.use(require('./routers/bookRouter'));
 
