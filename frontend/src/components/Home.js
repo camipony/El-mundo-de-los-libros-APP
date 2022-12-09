@@ -7,9 +7,18 @@ import { useAuth } from "../context/authContext";
 
 
 export default function Home () {
-    /*const {user} = useAuth();
-    console.log(user);*/
+    const {user, logout, loading} = useAuth();
+    console.log(user)
 
-    return <div>home</div>
+    if(loading) return <h1>loading</h1>
+
+
+    const handleLogout = async () =>{
+        await logout();
+    }
+    return <div>
+    <h1>Hi {user.email}</h1>
+    <button onClick={handleLogout}>Logout</button>
+    </div>
 
 }
