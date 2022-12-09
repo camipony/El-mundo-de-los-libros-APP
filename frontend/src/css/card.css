@@ -1,0 +1,18 @@
+
+.gap-4{
+    flex-direction: column;
+    
+}
+
+.md\:w-auto{
+    width: 15rem;
+}
+
+.w-full{
+    align-items: center;
+}
+
+.xl\:flex {
+    display: flex;
+    justify-content: center;
+}
