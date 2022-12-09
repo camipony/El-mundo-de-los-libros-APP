@@ -14,7 +14,6 @@ Technically these are the specifications of the project:
 * For the books microservice, firebase, mongodb, express, morgan and cors will be used
 * The technologies for the payment and admin microservice still need to be defined
 
-
 **PONER FOTO DE DIAGRAMA**
 
 ## Branches
@@ -28,6 +27,8 @@ Technically these are the specifications of the project:
 ## Control environment code
 
 *Git Flow* is ideal for projects that have a scheduled release cycle. This workflow does not add any new concepts or commands beyond those commonly used when working with Git (status, add, commit, checkout, merge, pull, and push). What it does do is assign very specific roles to different branches and define how and when they should interact.
+
+![Image text](https://wac-cdn.atlassian.com/dam/jcr:a13c18d6-94f3-4fc4-84fb-2b8f1b2fd339/01%20How%20it%20works.svg?cdnVersion=669)
 
 ## Developers
 * Juan José Revelo
