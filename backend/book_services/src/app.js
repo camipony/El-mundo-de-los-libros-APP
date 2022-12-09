@@ -23,6 +23,10 @@ app.use(
 )
 
 app.use(require('./routers/bookRouter'));
+app.use(require('./routers/authorRouter'));
+app.use(require('./routers/categoryRouter'));
+app.use(require('./routers/providerRouter'));
+app.use(require('./routers/qualificationRouter'));
 
 app.use('/test', (res, req) => {
     res.json("test")

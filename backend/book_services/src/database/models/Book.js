@@ -21,6 +21,7 @@ const book = new mongoose.Schema(
         categoria: [], // -> Recibe texto
         calificaciones: [], // -> Recibe {usuario: id, calificacion: 1-5, comentario: "", fecha_crecion: Now()}
         formato: [],  // -> Recibe {formato: "", idiomas: []}
+        autores: [],
         fecha_publicacion: Date,
         fecha_actualizacion: {
             type: Date,

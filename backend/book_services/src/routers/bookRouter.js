@@ -13,6 +13,7 @@ const  {
     get_book,
     add_book,
     change_cover,
+    update_book,
     delete_book
 } = require('../controllers/BookController');
 
@@ -36,6 +37,11 @@ book_router.put(
     storage.single('file'),
     upload, 
     change_cover
+)
+
+book_router.put(
+    '/book/:codigo',
+    update_book
 )
 
 book_router.delete(
