@@ -10,8 +10,10 @@ const {
 
 const  {
     get_books,
+    get_book,
     add_book,
-    change_cover
+    change_cover,
+    delete_book
 } = require('../controllers/BookController');
 
 book_router.get(
@@ -19,16 +21,26 @@ book_router.get(
     get_books
 );
 
+book_router.get(
+    '/book/:codigo',
+    get_book
+)
+
 book_router.post(
     '/book',
     add_book
 )
 
 book_router.put(
-    '/front_page/:codigo',
+    '/front-page/:codigo',
     storage.single('file'),
     upload, 
     change_cover
+)
+
+book_router.delete(
+    '/book/:codigo',
+    delete_book
 )
 
 module.exports = book_router;

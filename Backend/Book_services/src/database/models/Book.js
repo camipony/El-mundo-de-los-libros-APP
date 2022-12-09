@@ -7,27 +7,20 @@ const book = new mongoose.Schema(
             unique: true,
             required: true
         },
-        titulo:{
-            type: String
-        },
-        descripcion: {
-            type: String
-        },
+        titulo: { type: String, default: "" },
+        descripcion: { type: String, default: "" },
         portada: {
             type: String,
             default: "https://i.postimg.cc/XJ9Kyhb9/libros.png"
         },
         precio: {
-            type: mongoose.Decimal128,
+            type: Number,
             default: 0
         },
-        estado: {
-            type: String,
-            default: "activo"
-        },
-        fecha_publicacion: {
-            type: Date
-        },
+        estado: { type: String, default: "activo" },
+        categoria: [],
+        calificaciones: [],
+        fecha_publicacion: Date,
         fecha_actualizacion: {
             type: Date,
             default: new Date().toISOString()

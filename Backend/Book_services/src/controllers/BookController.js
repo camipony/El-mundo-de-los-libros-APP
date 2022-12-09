@@ -24,7 +24,19 @@ const get_books = async (req, res) => {
 
 const get_book = async (req, res) => {
     try {
-        
+        const codigo = req.params;
+        book.findOne(codigo, (err, docs) => {
+            if(err){
+                res.status(400).json({
+                    msg: "Ha ocurrido un error",
+                    error: err
+                })
+                return
+            }
+            res.json({
+                book: docs
+            })
+        })
     } catch (error) {
         console.log(error)
         res.status(500).json({
@@ -35,21 +47,9 @@ const get_book = async (req, res) => {
 
 const add_book = async (req, res) => {
     try {
-        const {
-            codigo,
-            titulo,
-            descripcion,
-            precio,
-            fecha_publicacion
-        } = req.body;
+        const datos = req.body;
         book.create(
-            {
-                codigo,
-                titulo,
-                descripcion,
-                precio,
-                fecha_publicacion
-            },
+            datos,
             (err, docs) => {
                 if( err ){
                     res.status(400).json({
@@ -109,7 +109,19 @@ const change_cover = async (req, res) => {
 
 const delete_book = async (req, res) => {
     try {
-        
+        const codigo = req.params;
+        book.deleteOne(codigo, (err) => {
+            if(err) {
+                res.status(400).json({
+                    msg: "Ha ocurrido un error",
+                    error: err
+                })
+                return 
+            }
+            res.status(200).json({
+                msg: "El libro fue eliminado"
+            })
+        })
     } catch (error) {
         console.log(error)
         res.status(500).json({
