@@ -1,19 +1,35 @@
 # El-mundo-de-los-libros-APP
 
-El mundo de los libros, es una empresa caleña emprendedora la cual cuenta con 5 años de experiencia en la comercializacion de libros. Con el propósito de expandir nuevos horizontes y obtencion de clientes, han decidido optar por la creacion de una pagina web donde puedan vender sus productos, actualizar noticias y eventos. 
+El mundo de libros is an entrepreneurial company from Cali with 5 years of experience in the commercialization of books. With the purpose of expanding new horizons and obtaining clients, they have decided to opt for the creation of a web page where they can sell their products, update news and events.
+
 ![Image text](https://github.com/camipony/El-mundo-de-los-libros-APP/blob/master/frontend/src/assets/logo_mdl.png)
 
-Como equipo realizaremos una app que ayude a solventar su necesidad en términos de e-commerce (simulado por el momento), organización de usuarios y noticias/eventos.
+As a team we will make an app that helps solve your need in terms of e-commerce (simulated for the moment), user organization and news/events.
 
-Técnicamente estas son las espeficicaciones del proyecto:
+Technically these are the specifications of the project:
+
+* Main microservices: user, payment, books and admin.
+* For all interfaces React JS will be used.
+* For the user microservice, firebase, mysql and express will be used.
+* For the books microservice, firebase, mongodb, express, morgan and cors will be used
+* The technologies for the payment and admin microservice still need to be defined
+
+
+**PONER FOTO DE DIAGRAMA**
 
 ## Branches
-* dev
-  >_main development branch where the frontend and backend code will be found and included. The final merges will be made on this branch after the code of the others is approved._
-* back
-  >_branch on which the frontend will work._
-* front
-  >_branch on which the backend will work._
-> After the developers fork the corresponding branch, make changes or add new code, they must send a pull request which will be reviewed and accepted by the Scrum master or Devops, who decides whether to accept or reject the request, in case If accepted, the code must be found in the corresponding branch, which will then be joined or sent to the dev branch.
 
-## Development rules
+* dev
+  >_development branch where programmers must upload their changes that will be approved through a pull request.
+  
+* master
+ >_main branch where only the correct changes will be allowed for merging
+
+## Control environment code
+
+*Git Flow* is ideal for projects that have a scheduled release cycle. This workflow does not add any new concepts or commands beyond those commonly used when working with Git (status, add, commit, checkout, merge, pull, and push). What it does do is assign very specific roles to different branches and define how and when they should interact.
+
+## Developers
+* Juan José Revelo
+* Johan David Portocarrero
+* Maria Camila Rodriguez
