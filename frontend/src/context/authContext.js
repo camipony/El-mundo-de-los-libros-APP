@@ -5,6 +5,7 @@ import {createUserWithEmailAndPassword ,
     onAuthStateChanged, 
     signOut, 
     GoogleAuthProvider,
+    sendPasswordResetEmail,
     signInWithPopup} from 'firebase/auth'
 import { auth } from '../firebase';
 
@@ -34,6 +35,10 @@ const loginWithGoogle = () => {
     return signInWithPopup(auth, googleProvider)
 }
 
+const resetPassword = (email) => {
+    sendPasswordResetEmail(auth, email)
+}
+
 const logout = () => signOut(auth)
 
     useEffect(() =>{
@@ -43,6 +48,6 @@ const logout = () => signOut(auth)
         });
         return () => unsubscribe();
     }, [] )
-    return (<authContext.Provider value = {{ signup, signin , user, logout , loading, loginWithGoogle}}>{children}</authContext.Provider>
+    return (<authContext.Provider value = {{ signup, signin , user, logout , loading, loginWithGoogle , resetPassword}}>{children}</authContext.Provider>
     )
 }

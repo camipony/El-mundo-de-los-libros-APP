@@ -1,7 +1,7 @@
 import "tailwindcss/tailwind.css";
 import React from 'react';
 import logo from '../assets/logo_mdl.png'
-import '../css/Register.css';
+import '../css/register.css';
 import { useState } from "react";
 import { useAuth } from "../context/authContext"; 
 import { useNavigate } from "react-router-dom";
@@ -128,18 +128,12 @@ const Register = ()  => {
                 <span className="text-gray-400">
                     ¿Ya tienes cuenta?{" "}
                     <a
-                        href="#"
+                        href="/login"
                         className="text-indigo-400 hover:text-indigo-500 transition-colors"
                     >
                         Ingresa
                     </a>
                 </span>
-                <a
-                    href="#"
-                    className="text-gray-400 hover:text-gray-200 transition-colors"
-                >
-                    ¿Olvidaste tu contraseña?
-                </a>
             </div>
             <div className="mt-4 order-1 md:order-2">
                 <button
