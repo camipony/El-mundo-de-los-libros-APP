@@ -1,9 +1,9 @@
 import "tailwindcss/tailwind.css";
 import React from 'react';
-import logo from '../assets/logo_mdl.png'
-import '../css/Register.css';
+import logo from '../../assets/logo_mdl.png'
+import '../../css/login.css';
 import { useState } from "react";
-import { useAuth } from "../context/authContext"; 
+import { useAuth } from "../../context/authContext"; 
 import { useNavigate } from "react-router-dom";
 
 
