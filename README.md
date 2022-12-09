@@ -1,8 +1,7 @@
 # El-mundo-de-los-libros-APP
 
 El mundo de los libros, es una empresa caleña emprendedora la cual cuenta con 5 años de experiencia en la comercializacion de libros. Con el propósito de expandir nuevos horizontes y obtencion de clientes, han decidido optar por la creacion de una pagina web donde puedan vender sus productos, actualizar noticias y eventos. 
-
-https://github.com/camipony/El-mundo-de-los-libros-APP/blob/master/frontend/src/assets/logo_mdl.png
+![Image text](https://github.com/camipony/El-mundo-de-los-libros-APP/blob/master/frontend/src/assets/logo_mdl.png)
 
 Como equipo realizaremos una app que ayude a solventar su necesidad en términos de e-commerce (simulado por el momento), organización de usuarios y noticias/eventos.
 
