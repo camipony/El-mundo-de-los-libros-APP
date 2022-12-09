@@ -37,6 +37,8 @@ const Register = ()  => {
                 setError('Correo invalido')
             }else if(error.code === "auth/weak-password"){
                 setError('La contraseña debe superar los 6 carácteres')
+            }else if(error.code === "auth/email-already-in-use"){
+                setError('Este correo ya se encuentra registrado')
             }
         }
     }

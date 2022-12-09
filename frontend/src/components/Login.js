@@ -1,19 +1,48 @@
 import "tailwindcss/tailwind.css";
 import React from 'react';
-import GoogleLogin from 'react-google-login';
 import logo from '../assets/logo_mdl.png'
-import '../css/Login.css'
+import '../css/Register.css';
 import { useState } from "react";
-import { useContext } from "react";
-import context from "../context/authContext";
+import { useAuth } from "../context/authContext"; 
+import { useNavigate } from "react-router-dom";
 
 
 const Login = ()  => {
 
   const [user, setUser] = useState({
     email: '',
-    password: ''
-  })
+    password: '',
+})
+
+
+const [error, setError] = useState();
+const {signin, loginWithGoogle}= useAuth();
+const navigate = useNavigate();
+
+const handleChange = ({target: {name, value}}) => 
+    setUser({...user, [name] : value})
+
+const handleGoogleSignin = async() => {
+ await loginWithGoogle()
+ navigate('/');
+}
+
+const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    try{
+
+        await signin(user.email, user.password);
+        navigate('/');
+
+    }catch (error){
+        if(error.code === "auth/wrong-password"){
+          setError('Contraseña incorrecta')
+        }else if(error.code === "auth/user-not-found"){
+          setError('El usuario no existe o su correo es incorrecto')
+        }
+}
+}
 
     return (
         <div className="min-h-screen bg-[#252831] grid grid-cols-1 lg:grid-cols-2">
@@ -27,6 +56,7 @@ const Login = ()  => {
       <button
         type="button"
         className="w-full flex items-center justify-center gap-2 border p-2 px-4 rounded-full"
+        onClick={handleGoogleSignin}
       >
         <img
           src="https://cdn-icons-png.flaticon.com/512/281/281764.png"
@@ -38,6 +68,7 @@ const Login = ()  => {
     </div>
     
     <form className="flex flex-col gap-4">
+    {error && <p>{error}</p>}
       <div>
         <label htmlFor="email" className="text-gray-200">
           Correo electrónico *
@@ -45,9 +76,11 @@ const Login = ()  => {
         <input
           type="email"
           id="email"
+          name= "email"
           autoComplete="off"
           className="w-full py-2 px-4 bg-transparent border rounded-full mt-2 outline-none focus:border-indigo-400"
           placeholder="Ingresa tu correo electrónico"
+          onChange={handleChange}
         />
       </div>
       <div>
@@ -57,9 +90,11 @@ const Login = ()  => {
         <input
           type="password"
           id="password"
+          name= "password"
           autoComplete="off"
           className="w-full py-2 px-4 bg-transparent border rounded-full mt-2 outline-none focus:border-indigo-400"
           placeholder="Ingresa tu contraseña"
+          onChange={handleChange}
         />
       </div>
       <div className="flex flex-col md:flex-row items-center justify-between gap-4 order-2 md:order-1">
@@ -83,6 +118,7 @@ const Login = ()  => {
         <button
           type="submit"
           className="w-full bg-indigo-700 p-2 rounded-full hover:bg-indigo-800 transition-colors"
+          onClick={handleSubmit}
         >
           Iniciar sesión
         </button>
