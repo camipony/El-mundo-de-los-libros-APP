@@ -18,8 +18,9 @@ const book = new mongoose.Schema(
             default: 0
         },
         estado: { type: String, default: "activo" },
-        categoria: [],
-        calificaciones: [],
+        categoria: [], // -> Recibe texto
+        calificaciones: [], // -> Recibe {usuario: id, calificacion: 1-5, comentario: "", fecha_crecion: Now()}
+        formato: [],  // -> Recibe {formato: "", idiomas: []}
         fecha_publicacion: Date,
         fecha_actualizacion: {
             type: Date,
