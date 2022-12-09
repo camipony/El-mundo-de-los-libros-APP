@@ -10,7 +10,7 @@ export default function Home () {
     const {user, logout, loading} = useAuth();
     console.log(user)
 
-    if(loading) return <h1>loading</h1>
+    if(loading) return <h1>loading page</h1>
 
 
     const handleLogout = async () =>{
