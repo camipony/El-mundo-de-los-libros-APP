@@ -1,4 +1,5 @@
 const book = require('../database/models/Book');
+const category = require('../database/models/Category')
 
 const get_books = async (req, res) => {
     try {
@@ -107,6 +108,41 @@ const change_cover = async (req, res) => {
     }
 } 
 
+const add_image = async (req, res) => {
+    try {
+        const codigo = req.params;
+        const image = req.urlFile;
+        book.findOne(codigo, (err, docs) => {
+            if(err){
+                res.status(400).json({
+                    msg: "Ha ocurrido un error",
+                    error: err
+                })
+                return
+            }
+            docs.imagenes.imagenes = [...docs.imagenes.imagenes, portada]
+            docs.save((error, docs) => {
+                if(error){
+                    res.status(400).json({
+                        msg: "Ha ocurrido un erro",
+                        error: error
+                    })
+                    return
+                }
+                res.status(200).json({
+                    msg: "Libro actualizado",
+                    book: docs
+                })
+            })
+        } )
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            error: "Ah ocurrido un error"
+        })
+    }
+}
+
 const delete_book = async (req, res) => {
     try {
         const codigo = req.params;
@@ -170,6 +206,7 @@ module.exports = {
     get_book,
     add_book,
     change_cover,
+    add_image,
     delete_book,
     update_book
 }
