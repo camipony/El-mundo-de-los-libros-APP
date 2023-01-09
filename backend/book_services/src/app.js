@@ -26,7 +26,17 @@ app.use(require('./routers/bookRouter'));
 app.use(require('./routers/authorRouter'));
 app.use(require('./routers/categoryRouter'));
 app.use(require('./routers/providerRouter'));
-app.use(require('./routers/qualificationRouter'));
+
+app.use(
+    '/upload',
+    storage.single('file'),
+    upload, 
+    (req, res) => {
+        res.status.json({
+            url: req.urlFile
+        })
+    }
+)
 
 app.use('/test', (res, req) => {
     res.json("test")

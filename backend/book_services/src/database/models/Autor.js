@@ -5,9 +5,6 @@ const autor = new mongoose.Schema(
         nombre: {
             type: String
         },
-        apellido: {
-            type: String
-        },
         pseudonimo: {
             type: String
         }
