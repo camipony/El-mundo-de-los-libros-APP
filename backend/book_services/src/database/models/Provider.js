@@ -10,6 +10,9 @@ const provider = new mongoose.Schema(
         },
         ubicacion: {
             type: String
+        },
+        e_mail: {
+            type: String
         }
     }
 )
