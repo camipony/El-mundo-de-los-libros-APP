@@ -1,30 +1,9 @@
 const book = require('../database/models/Book');
 
-const get_books = async (req, res) => {
-    try {
-        book.find({}, (err, docs) => {
-            if(err){
-                res.status(400).json({
-                    msg: "Ha ocurrido un error",
-                    error: err
-                })
-                return
-            }
-            res.json({
-                book:docs
-            })
-        })
-    } catch (error) {
-        console.log(error)
-        res.status(500).json({
-            error: "Ah ocurrido un error"
-        })
-    }
-}
-
-const get_book = async (req, res) => {
+const add_format_book = async (req, res) => {
     try {
         const codigo = req.params;
+        const {formato, idiomas} = req.body
         book.findOne(codigo, (err, docs) => {
             if(err){
                 res.status(400).json({
@@ -33,58 +12,7 @@ const get_book = async (req, res) => {
                 })
                 return
             }
-            res.json({
-                book: docs
-            })
-        })
-    } catch (error) {
-        console.log(error)
-        res.status(500).json({
-            error: "Ah ocurrido un error"
-        })
-    }
-}
-
-const add_book = async (req, res) => {
-    try {
-        const datos = req.body;
-        book.create(
-            datos,
-            (err, docs) => {
-                if( err ){
-                    res.status(400).json({
-                        msg: "Ha ocurrido un error",
-                        error: err
-                    })
-                    return
-                }
-                res.status(201).json({
-                    msg: "Libro agregado con exito",
-                    data: docs
-                })
-            }
-        )
-    } catch (error) {
-        console.log(error)
-        res.status(500).json({
-            error: "Ah ocurrido un error"
-        })
-    }
-}
-
-const change_cover = async (req, res) => {
-    try {
-        const codigo = req.params;
-        const portada = req.urlFile;
-        book.findOne(codigo, (err, docs) => {
-            if(err){
-                res.status(400).json({
-                    msg: "Ha ocurrido un error",
-                    error: err
-                })
-                return
-            }
-            docs.portada = portada
+            docs.formato = [...docs.formato, {formato: formato, idiomas: idiomas}]
             docs.save((error, docs) => {
                 if(error){
                     res.status(400).json({
@@ -105,35 +33,12 @@ const change_cover = async (req, res) => {
             error: "Ah ocurrido un error"
         })
     }
-} 
+}
 
-const delete_book = async (req, res) => {
+const add_languages_book = async (req, res) => {
     try {
         const codigo = req.params;
-        book.deleteOne(codigo, (err) => {
-            if(err) {
-                res.status(400).json({
-                    msg: "Ha ocurrido un error",
-                    error: err
-                })
-                return 
-            }
-            res.status(200).json({
-                msg: "El libro fue eliminado"
-            })
-        })
-    } catch (error) {
-        console.log(error)
-        res.status(500).json({
-            error: "Ah ocurrido un error"
-        })
-    }
-} 
-
-const update_book = async (req, res) => {
-    try {
-        const codigo = req.params;
-        const data = req.body;
+        const {formato, idiomas} = req.body
         book.findOne(codigo, (err, docs) => {
             if(err){
                 res.status(400).json({
@@ -142,7 +47,12 @@ const update_book = async (req, res) => {
                 })
                 return
             }
-            docs = data
+            docs.formato = docs.formato.map( format => {
+                if( format.formato && format.formato === formato ){
+                    return {formato: formato, idiomas: [...format.idiomas, idiomas]}
+                }
+                return format
+            } )
             docs.save((error, docs) => {
                 if(error){
                     res.status(400).json({
@@ -163,13 +73,87 @@ const update_book = async (req, res) => {
             error: "Ah ocurrido un error"
         })
     }
-} 
+}
+
+const remove_format_book = async (req, res) => {
+    try {
+        const {codigo, formato} = req.params;
+        book.findOne(codigo, (err, docs) => {
+            if(err){
+                res.status(400).json({
+                    msg: "Ha ocurrido un error",
+                    error: err
+                })
+                return
+            }
+            docs.formato = docs.formato.filter( format => format.formato != formato )
+            docs.save((error, docs) => {
+                if(error){
+                    res.status(400).json({
+                        msg: "Ha ocurrido un erro",
+                        error: error
+                    })
+                    return
+                }
+                res.status(200).json({
+                    msg: "Libro actualizado",
+                    book: docs
+                })
+            })
+        } )
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            error: "Ah ocurrido un error"
+        })
+    }
+}
+
+const remove_languages_book = async (req, res) => {
+    try {
+        const {codigo, formato, idioma} = req.params;
+        book.findOne(codigo, (err, docs) => {
+            if(err){
+                res.status(400).json({
+                    msg: "Ha ocurrido un error",
+                    error: err
+                })
+                return
+            }
+            docs.formato = docs.formato.map( format => {
+                if( format.formato && format.formato === formato ){
+                    return {
+                        formato: formato, 
+                        idiomas: format.idioma.filter( idiom => idiom != idioma )
+                    }
+                }
+                return format
+            } )
+            docs.save((error, docs) => {
+                if(error){
+                    res.status(400).json({
+                        msg: "Ha ocurrido un erro",
+                        error: error
+                    })
+                    return
+                }
+                res.status(200).json({
+                    msg: "Libro actualizado",
+                    book: docs
+                })
+            })
+        } )
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            error: "Ah ocurrido un error"
+        })
+    }
+}
 
 module.exports = {
-    get_books,
-    get_book,
-    add_book,
-    change_cover,
-    delete_book,
-    update_book
+    add_format_book,
+    add_languages_book,
+    remove_format_book,
+    remove_languages_book
 }
