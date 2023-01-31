@@ -4,18 +4,18 @@ const {
 const author_router = Router();
 
 const {
-    author_get,
-    author_post,
-    author_put,
-    author_delete
+    get_authors,
+    add_author,
+    update_author,
+    delete_author
 } = require('../controllers/AuthorController');
 
-author_router.get('/autores', author_get);
+author_router.get('/autores', get_authors);
 
-author_router.post('/autor', author_post);
+author_router.post('/autor', add_author);
 
-author_router.put('/autor/:id', author_put);
+author_router.put('/autor/:id', update_author);
 
-author_router.delete('/autor/:id', author_delete);
+author_router.delete('/autor/:id', delete_author);
 
 module.exports = author_router;
