@@ -1,6 +1,6 @@
 import "tailwindcss/tailwind.css";
 import React from 'react';
-import logo from '../../assets/logo_mdl.png'
+import logo from '../../Assets/logo_mdl.png'
 import '../../css/login.css';
 import { useState } from "react";
 import { useAuth } from "../../context/authContext"; 
