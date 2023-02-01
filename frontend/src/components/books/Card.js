@@ -1,6 +1,6 @@
 import "tailwindcss/tailwind.css";
 import React from "react";
-import "../assets/css/Card.css";
+import "../../css/card.css";
 
 const Card = (props) => {
   const { img, title, autor, price } = props;
