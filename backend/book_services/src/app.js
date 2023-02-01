@@ -3,6 +3,11 @@ const cors = require('cors');
 const morgan = require('morgan');
 const body_parser = require('body-parser');
 
+const {
+    upload,
+    storage
+} = require('./middleware/uploanImage')
+
 const app = express();
 
 app.use(morgan('dev'));

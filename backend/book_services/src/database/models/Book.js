@@ -9,13 +9,8 @@ const book = new mongoose.Schema(
         },
         titulo: { type: String, default: "" },
         descripcion: { type: String, default: "" },
-        imagenes: {
-            portada: {
-                type: String,
-                default: "https://i.postimg.cc/XJ9Kyhb9/libros.png"
-            },
-            imagenes: [] // -> Recibe las ruta
-        },
+        portada: { type: String, default: 'https://i.postimg.cc/XJ9Kyhb9/libros.png' },
+        imagenes: [], // -> Recibe las ruta
         precio: {
             type: Number,
             default: 0
