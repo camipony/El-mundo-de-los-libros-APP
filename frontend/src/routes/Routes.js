@@ -1,4 +1,5 @@
 import React from "react";
+import { Provider } from 'react-redux';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import Login from "../pages/user/Login";
 import Home from "../pages/user/Home";
@@ -6,10 +7,13 @@ import Register from "../pages/user/Register";
 import HomeGeneral from "../pages/HomeGeneral"
 import {AuthProvider} from '../context/authContext'
 import { ProtectedRoute } from "../pages/user/ProtectedRoute";
-
+import store from '../store'
 
 function App(){
+    const token = localStorage.getItem('token');
+    const tokenReady = token !== null && token !== 'undefined';
     return(
+        <Provider store={store}>
         <BrowserRouter>
         <AuthProvider>
         <Routes>
@@ -25,6 +29,7 @@ function App(){
         </Routes>
         </AuthProvider>
         </BrowserRouter>
+        </Provider>
     )
 }
 

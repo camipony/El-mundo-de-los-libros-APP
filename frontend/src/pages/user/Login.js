@@ -2,17 +2,23 @@ import "tailwindcss/tailwind.css";
 import React from 'react';
 import logo from '../../assets/logo_mdl.png'
 import '../../css/login.css';
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { login } from "../../actions/authActions";
+import { useDispatch, useSelector } from "react-redux";
 import { useAuth } from "../../context/authContext"; 
 import { useNavigate } from "react-router-dom";
 
 
 const Login = ()  => {
-
+  
+  const { isAuthenticated } = useSelector((state)=>state.authReducer)
+  const dispatch = useDispatch();
   const [user, setUser] = useState({
     email: '',
     password: '',
 })
+
+const {email,password} = user;
 
 
 const [error, setError] = useState();
@@ -26,6 +32,16 @@ const handleGoogleSignin = async() => {
  await loginWithGoogle()
  navigate('/');
 }
+
+const onClick = () =>{
+  dispatch(login(email,password))
+}
+
+useEffect(()=>{
+  if(isAuthenticated){
+     window.location.replace('/dashboard')
+  }
+},[dispatch,isAuthenticated])
 
 const handleSubmit = async (e) => {
     e.preventDefault()
@@ -118,7 +134,7 @@ const handleSubmit = async (e) => {
         <button
           type="submit"
           className="w-full bg-indigo-700 p-2 rounded-full hover:bg-indigo-800 transition-colors"
-          onClick={handleSubmit}
+          onClick={onClick}
         >
           Iniciar sesión
         </button>

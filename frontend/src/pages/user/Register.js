@@ -2,11 +2,17 @@ import "tailwindcss/tailwind.css";
 import React from 'react';
 import logo from '../../assets/logo_mdl.png'
 import '../../css/register.css';
-import { useState } from "react";
+import { useState, useEffect} from "react";
 import { useAuth } from "../../context/authContext"; 
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { register } from "../../actions/authActions";
 
 const Register = ()  => {
+
+    const { isAuthenticated } = useSelector((state)=>state.authReducer)
+    const dispatch = useDispatch();
+
     const [user, setUser] = useState({
         name: '',
         email: '',
@@ -14,6 +20,25 @@ const Register = ()  => {
         password: '',
 
     })
+
+    const {name,email,date,password} = user;
+
+    const onClick = (e)=>{
+        e.preventDefault();
+        dispatch(register({
+            identificacion: 12345667,
+            name: name,
+            email: email,
+            date: date,
+            password: password
+        }))
+    }
+
+    useEffect(()=>{
+        if(isAuthenticated){
+           window.location.replace('/dashboard')
+        }
+    },[dispatch,isAuthenticated])
 
 
     const [error, setError] = useState();
@@ -55,6 +80,7 @@ const Register = ()  => {
         <div className="w-full">
             <button
                 type="button"
+                onClick={handleSubmit}
                 className="w-full flex items-center justify-center gap-2 border p-2 px-4 rounded-full"
             >
                 <img
@@ -138,7 +164,7 @@ const Register = ()  => {
             <div className="mt-4 order-1 md:order-2">
                 <button
                     type="submit"
-                    onClick={handleSubmit}
+                    onClick={onClick}
                     className="w-full bg-indigo-700 p-2 rounded-full hover:bg-indigo-800 transition-colors"
                 >
                     Crear cuenta
