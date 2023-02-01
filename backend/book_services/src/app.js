@@ -3,6 +3,11 @@ const cors = require('cors');
 const morgan = require('morgan');
 const body_parser = require('body-parser');
 
+const {
+    upload,
+    storage
+} = require('./middleware/uploanImage')
+
 const app = express();
 
 app.use(morgan('dev'));
@@ -26,7 +31,17 @@ app.use(require('./routers/bookRouter'));
 app.use(require('./routers/authorRouter'));
 app.use(require('./routers/categoryRouter'));
 app.use(require('./routers/providerRouter'));
-app.use(require('./routers/qualificationRouter'));
+
+app.use(
+    '/upload',
+    storage.single('file'),
+    upload, 
+    (req, res) => {
+        res.status.json({
+            url: req.urlFile
+        })
+    }
+)
 
 app.use('/test', (res, req) => {
     res.json("test")

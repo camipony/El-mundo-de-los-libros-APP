@@ -1,4 +1,5 @@
 const book = require('../database/models/Book');
+const category = require('../database/models/Category');
 
 const get_books = async (req, res) => {
     try {
@@ -10,6 +11,7 @@ const get_books = async (req, res) => {
                 })
                 return
             }
+
             res.json({
                 book:docs
             })
