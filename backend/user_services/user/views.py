@@ -5,8 +5,18 @@ from django.http import HttpResponse, JsonResponse
 from rest_framework .parsers import JSONParser
 from django.views.decorators.csrf import csrf_exempt
 import os
+from django.core.serializers import serialize
+import json
+
 
 # Create your views here.
+
+def hello(request):
+    return HttpResponse('Hello world!')
+
+def get_users(request):
+    users = list(User.objects.values())
+    return JsonResponse(users, safe=False)
 
 @csrf_exempt
 def create_user(request):

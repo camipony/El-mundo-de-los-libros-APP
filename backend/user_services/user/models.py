@@ -17,8 +17,16 @@ class Favorites(models.Model):
 class Cart(models.Model):
     id_cart = models.IntegerField(primary_key=True, default=0000)
     identification = models.IntegerField()
+    status = models.CharField(max_length=100, default="activo")
+    update_date = models.DateTimeField(default=datetime.now())
+    creation_date = models.DateTimeField(default=datetime.now())
+
+class Item_cart(models.Model):
+    id_item = models.IntegerField(primary_key=True, default=0)
+    id_cart = models.IntegerField()
     id_book = models.IntegerField()
-    
+    count = models.IntegerField()
+    creation_date = models.DateTimeField(default=datetime.now())
 
 class Bill(models.Model):
     id_bill = models.IntegerField(primary_key=True, default=0000)

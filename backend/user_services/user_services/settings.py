@@ -80,10 +80,10 @@ WSGI_APPLICATION = 'user_services.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'userdb',
-        'USER': 'postgres',
-        'PASSWORD': '1307',
-        'HOST': 'localhost',
+        'NAME': 'xgfwxctg',
+        'USER': 'xgfwxctg',
+        'PASSWORD': 'kM7I0N5P-MEa0OtrCDAZYpLhIREDrs_s',
+        'HOST': 'motty.db.elephantsql.com',
         'PORT': '5432'
     }
 }

@@ -14,7 +14,14 @@ class FavoriteSerializer(serializers.ModelSerializer):
 class CartSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cart
-        fields = ['id_cart', 'identification','id_book']
+        fields = ['id_cart', 'identification','status', 'update_date', 'creation_date']
+        read_only_fields = ('creation_date')
+
+class ItemCartSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Item_cart
+        fields = ['id_item', 'id_cart', 'id_book', 'count', 'creation_date']
+        read_only_fields = ('creation_date')
 
 class BillSerializer(serializers.ModelSerializer):
     class Meta:
