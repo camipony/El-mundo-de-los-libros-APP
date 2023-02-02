@@ -1,13 +1,12 @@
-from django.urls import path
-from .views import *
+from rest_framework import routers
+from .apis import *
 
-urlpatterns = [
-    path('hello/', hello),    
-    path('users/', get_users),
-    path('user/', create_user),
-    #path('user/<int:id>/', get_user),
-    #path('user/<int:id>/', delete_user),
-    #path('user/<int:id>/', update_user),
-    path('user/id/<int:pk>/', user_by_id),
-    path('login/<str:email>/', check_login),
-]
+router = routers.DefaultRouter()
+
+#router.register('api/user', UserViewSet, 'user')
+router.register('api/favorites', FavoritesViewSet, 'favorites')
+router.register('api/cart', CartViewSet, 'cart')
+router.register('api/itemcart', ItemCartViewSet, 'itemcart')
+router.register('api/bill', BillViewSet, 'bill')
+
+urlpatterns = router.urls
