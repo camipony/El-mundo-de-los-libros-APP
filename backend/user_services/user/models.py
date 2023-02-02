@@ -1,6 +1,6 @@
 from django.db import models
 from datetime import datetime
-# Create your models here.
+
 
 class User(models.Model):
     identification = models.IntegerField(primary_key=True, default=00000000)
