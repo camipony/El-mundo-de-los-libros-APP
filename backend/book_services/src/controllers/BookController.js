@@ -90,7 +90,7 @@ const change_cover = async (req, res) => {
             docs.save((error, docs) => {
                 if(error){
                     res.status(400).json({
-                        msg: "Ha ocurrido un erro",
+                        msg: "Ha ocurrido un error",
                         error: error
                     })
                     return
@@ -148,7 +148,7 @@ const update_book = async (req, res) => {
             docs.save((error, docs) => {
                 if(error){
                     res.status(400).json({
-                        msg: "Ha ocurrido un erro",
+                        msg: "Ha ocurrido un error",
                         error: error
                     })
                     return
