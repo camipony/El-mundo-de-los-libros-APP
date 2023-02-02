@@ -1,8 +1,8 @@
 import React from "react";
-import logo from '../../Assets/logo.png'
-import daviplata from '../../Assets/daviplata.png'
-import bancolombia from '../../Assets/bancolombia.png'
-import mercado from '../../Assets/mercadopago.png'
+import logo from '../../assets/logo.png'
+import daviplata from '../../assets/daviplata.png'
+import bancolombia from '../../assets/bancolombia.png'
+import mercado from '../../assets/mercadopago.png'
 import {Facebook, WhatsApp, Instagram} from '@mui/icons-material';
 import "../../css/footer.css";
 

@@ -7,6 +7,6 @@ router = routers.DefaultRouter()
 router.register('api/favorites', FavoritesViewSet, 'favorites')
 router.register('api/cart', CartViewSet, 'cart')
 router.register('api/itemcart', ItemCartViewSet, 'itemcart')
-router.register('api/bill', BillViewSet, 'bill')
+router.register('api/purchased', PurchasedBooksViewSet, 'bill')
 
 urlpatterns = router.urls

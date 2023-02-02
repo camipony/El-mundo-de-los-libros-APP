@@ -103,6 +103,42 @@ const typeDefs = `
         fecha_actualizacion: String
     }
 
+    type User {
+        id: Int
+        first_name: String
+        last_name: String
+        username: String
+        email: String
+    }
+
+    type Purchased_books {
+        id: Int
+        identification: Int
+        id_book: Book
+        creation_date: String
+    }
+
+    type Item_cart {
+        id_item: Int
+        id_cart: Int
+        id_book: Book
+        count: Int
+        creation_date: String
+    }
+
+    type Cart {
+        id_cart: Int
+        identification: Int
+        creation_date: String
+        items: [Item_cart]
+    }
+
+    type Favorites {
+        id_favorites: Int
+        identification: Int
+        id_book: Book
+    }
+
     type Query{
         hello: String
         getBooks: [Book]
@@ -110,6 +146,7 @@ const typeDefs = `
         getAutores: [Autor]
         getCategoria: [Categoria]
         getProveedor: [Proveedor]
+        getCart(ident: Int!) : String
     }
 
     type Mutation {
