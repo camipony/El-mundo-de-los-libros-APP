@@ -22,7 +22,7 @@ class ItemCartViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.AllowAny]
     serializer_class = ItemCartSerializer
 
-class BillViewSet(viewsets.ModelViewSet):
-    queryset = Bill.objects.all()
+class PurchasedBooksViewSet(viewsets.ModelViewSet):
+    queryset = Purchased_books.objects.all()
     permission_classes = [permissions.AllowAny]
-    serializer_class = BillSerializer
+    serializer_class = PurchasedBooksSerializer

@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 const rutaMicroBook = 'http://localhost:4000';
+const rutaMicroUser = 'http://localhost:8000/';
 
 export const resolvers = {
     Query: {
@@ -43,6 +44,15 @@ export const resolvers = {
             try {
                 let data = await axios.get(rutaMicroBook + '/providers')
                 return data.data.categories
+            } catch (error) {
+                console.log(error)
+            }
+        },
+        getCart: async (_, {ident}) => {
+            try {
+                let data = await axios.get('http://localhost:8000/method/cart/123456789/')
+                console.log(data)
+                return " Hello "
             } catch (error) {
                 console.log(error)
             }
