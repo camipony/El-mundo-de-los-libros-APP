@@ -9,8 +9,8 @@ import "swiper/css";
 import "swiper/css/bundle";
 import "swiper/css/pagination";
 import "../css/banner.css";
-import image from "../Assets/ban2.jpg"
-import image2 from "../Assets/ban3.jpg"
+import image from "../assets/ban2.jpg"
+import image2 from "../assets/ban3.jpg"
 
 // import required modules
 import { Pagination } from "swiper";
