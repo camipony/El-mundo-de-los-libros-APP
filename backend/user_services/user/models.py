@@ -11,25 +11,24 @@ from datetime import datetime
 #    password = models.CharField(max_length=100)
 
 class Favorites(models.Model):
-    id_favorites = models.IntegerField(primary_key=True, default=0)
+    id_favorites = models.AutoField(primary_key=True)
     identification = models.IntegerField()
-    id_book = models.IntegerField()
+    id_book = models.CharField(max_length=100)
 
 class Cart(models.Model):
-    id_cart = models.IntegerField(primary_key=True, default=0000)
+    id_cart = models.AutoField(primary_key=True)
     identification = models.IntegerField()
-    status = models.CharField(max_length=100, default="activo")
-    update_date = models.DateTimeField(auto_now_add=True)
     creation_date = models.DateTimeField(auto_now_add=True)
 
 class Item_cart(models.Model):
-    id_item = models.IntegerField(primary_key=True, default=0)
+    id_item = models.AutoField(primary_key=True)
     id_cart = models.IntegerField()
-    id_book = models.IntegerField()
+    id_book = models.CharField(max_length=100)
     count = models.IntegerField()
     creation_date = models.DateTimeField(auto_now_add=True)
 
-class Bill(models.Model):
-    id_bill = models.IntegerField(primary_key=True, default=0000)
+class Purchased_books(models.Model):
+    id = models.AutoField(primary_key=True)
     identification = models.IntegerField()
-    id_cart = models.IntegerField()
+    id_book = models.CharField(max_length=100)
+    creation_date = models.DateTimeField(auto_now_add=True)
