@@ -76,29 +76,11 @@ const update_provider = async (req, res) => {
     try {
         const {id} = req.params;
         const data = req.body;
-        provider.findOne({_id: id}, (err, docs) => {
-            if(err){
-                res.status(400).json({
-                    msg: "Ha ocurrido un error",
-                    error: err
-                })
-                return
-            }
-            docs = data
-            docs.save((error, docs) => {
-                if(error){
-                    res.status(400).json({
-                        msg: "Ha ocurrido un erro",
-                        error: error
-                    })
-                    return
-                }
-                res.status(200).json({
-                    msg: "Proveedor actualizado",
-                    book: docs
-                })
-            })
-        } )
+        let docs = provider.updateOne({_id: id}, data)
+        res.status(200).json({
+            msg: "Proveedor actualizado",
+            provider: docs
+        })
     } catch (error) {
         console.log(error)
         res.status(500).json({

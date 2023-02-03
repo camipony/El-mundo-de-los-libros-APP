@@ -23,7 +23,6 @@ class Item_cart(models.Model):
     id_item = models.AutoField(primary_key=True)
     id_cart = models.IntegerField()
     id_book = models.CharField(max_length=100)
-    count = models.IntegerField()
     creation_date = models.DateTimeField(auto_now_add=True)
 
 class Purchased_books(models.Model):

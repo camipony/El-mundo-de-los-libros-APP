@@ -9,4 +9,5 @@ urlpatterns = [
     path('favoritesbook/<int:pk>/<str:codigo>/', FavoriteBookView.as_view()),
     path('purchased/<int:pk>/', PurchasedView.as_view()),
     path('purchasedbook/<int:pk>/<str:codigo>/', PurchasedBookView.as_view()),
+    path('pay/<int:pk>/', ItemPay.as_view()),
 ]

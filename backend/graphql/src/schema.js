@@ -4,7 +4,7 @@ import { resolvers } from "./resolvers";
 const typeDefs = `
 
     type Calificaciones {
-        usuario: ID
+        usuario: User
         calificacion: Int
         comentario: String
         fecha_crecion: String
@@ -143,7 +143,6 @@ const typeDefs = `
         id_item: Int
         id_cart: Int
         id_book: Book
-        count: Int
         creation_date: String
     }
 

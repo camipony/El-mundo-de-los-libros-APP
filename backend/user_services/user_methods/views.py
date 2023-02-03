@@ -10,8 +10,6 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
 
-
-
 class UserView(APIView):
     
     def get_user(self, pk):
@@ -50,6 +48,7 @@ class FavoritesView(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 class FavoriteBookView(APIView):
+    
     def get_object_by_book(self, dato, codigo):
         try:
             return Favorites.objects.filter(identification=dato).filter(id_book=codigo)
@@ -60,7 +59,7 @@ class FavoriteBookView(APIView):
         post = self.get_object_by_book(pk, codigo)
         serializer = FavoriteSerializer(post, many=True)  
         return Response(serializer.data)    
-
+    
 class CartView(APIView):
         
     def get_cart(self, id):
@@ -104,6 +103,39 @@ class ItemCartView(APIView):
     def delete(self, request, pk, format=None):
         post = self.get_item(pk)
         post.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    
+class ItemPay(APIView):
+    
+    def get_cart(self, id):
+        try:
+            return Cart.objects.filter(identification = id)
+        except Cart.DoesNotExist:
+            raise Http404
+    
+    def get_item(self, pk):
+        try:
+            return Item_cart.objects.filter(id_cart = pk)
+        except Item_cart.DoesNotExist:
+            raise Http404
+    
+    def add_purchase(self, data):
+        try:
+            serializer = PurchasedBooksSerializer(data=data)
+            if serializer.is_valid():
+                serializer.save()
+        except Purchased_books.DoesNotExist:
+            raise Http404
+    
+    def delete(self, request, pk, format=None):
+        cart = self.get_cart(pk)
+        post = self.get_item(cart[0].id_cart)
+        for i in post:
+            self.add_purchase({
+                "identification": pk,
+                "id_book": i.id_book
+            })
+            i.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
     
 class PurchasedView(APIView):
