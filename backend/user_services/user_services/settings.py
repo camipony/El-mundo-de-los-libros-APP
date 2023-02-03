@@ -38,8 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'user',
-    'user_account',
-    'user_methods',
     'rest_framework',
     'knox',
     'corsheaders',

@@ -17,7 +17,7 @@ export const resolvers = {
                 let data = run_axios(rutaMicroBook + '/books')
                 data.data.book.calificaciones = get_calificacion(
                     data.data.book.calificaciones, 
-                    rutaMicroUser+'/method/user/'+calif.usuario+'/'
+                    rutaMicroUser+'/user/'+calif.usuario+'/'
                 )
                 return data.data.book
             } catch (error) {
@@ -29,10 +29,10 @@ export const resolvers = {
                 let data = run_axios(rutaMicroBook + '/books')
                 data.data.book.calificaciones = get_calificacion(
                     data.data.book.calificaciones, 
-                    rutaMicroUser+'/method/user/'+calif.usuario+'/'
+                    rutaMicroUser+'/user/'+calif.usuario+'/'
                 )
-                let favorite = run_axios(rutaMicroUser+'/method/favorites/'+ident+'/')
-                let purchased = run_axios(rutaMicroUser+'/method/purchased/'+ident+'/')
+                let favorite = run_axios(rutaMicroUser+'/favorites/'+ident+'/')
+                let purchased = run_axios(rutaMicroUser+'/purchased/'+ident+'/')
                 data.data.book = data.data.book.map(book => {
                     let filter = favorite.data.filter(b => b.codigo === book.codigo)
                     let filter2 = purchased.data.filter(b => b.codigo   === book.codigo)
@@ -62,7 +62,7 @@ export const resolvers = {
                 let data = run_axios(rutaMicroBook + '/book/' + codigo)
                 data.data.book.calificaciones = get_calificacion(
                     data.data.book.calificaciones, 
-                    rutaMicroUser+'/method/user/'+calif.usuario+'/'
+                    rutaMicroUser+'/user/'+calif.usuario+'/'
                 )
                 return data.data.book
             } catch (error) {
@@ -74,10 +74,10 @@ export const resolvers = {
                 let data = run_axios(rutaMicroBook + '/book/' + codigo)
                 data.data.book.calificaciones = get_calificacion(
                     data.data.book.calificaciones, 
-                    rutaMicroUser+'/method/user/'+calif.usuario+'/'
+                    rutaMicroUser+'/user/'+calif.usuario+'/'
                 )
-                let favorite = run_axios(rutaMicroUser+'/method/favoritesbook/'+ident+'/'+codigo+'/')
-                let purchased = run_axios(rutaMicroUser+'/method/purchasedbook/'+ident+'/'+codigo+'/')
+                let favorite = run_axios(rutaMicroUser+'/favoritesbook/'+ident+'/'+codigo+'/')
+                let purchased = run_axios(rutaMicroUser+'/purchasedbook/'+ident+'/'+codigo+'/')
                 if( favorite.data && favorite.data.length > 0 ){
                     data.data.book.is_favorite = true
                 } 
@@ -123,8 +123,8 @@ export const resolvers = {
         },
         getCart: (_, {ident}) => {
             try {
-                let data = run_axios(rutaMicroUser + '/method/cart/' + ident +'/')
-                const items = run_axios(rutaMicroUser + '/method/item/' + data.data[0].id_cart + '/')
+                let data = run_axios(rutaMicroUser + '/cart/' + ident +'/')
+                const items = run_axios(rutaMicroUser + '/item/' + data.data[0].id_cart + '/')
                 let itemsBook = items.data 
 
                 itemsBook = itemsBook.map(async item => {
@@ -141,7 +141,7 @@ export const resolvers = {
         },
         getFavorite: (_, {ident}) => {
             try {
-                let data = run_axios(rutaMicroUser+'/method/favorites/'+ident+'/')
+                let data = run_axios(rutaMicroUser+'/favorites/'+ident+'/')
                 let book = data.data.map(async favorites => {
                     let book = run_axios(rutaMicroBook + '/book/' + favorites.id_book)
                     return book.data.book
@@ -153,7 +153,7 @@ export const resolvers = {
         },
         getPurchased_books: (_, {ident}) => {
             try {
-                let data = run_axios(rutaMicroUser+'/method/purchased/'+ident+'/')
+                let data = run_axios(rutaMicroUser+'/purchased/'+ident+'/')
                 let book = data.data.map(async purchased => {
                     let book = run_axios(rutaMicroBook + '/book/' + purchased.id_book)
                     return book.data.book
