@@ -4,7 +4,7 @@ import { resolvers } from "./resolvers";
 const typeDefs = `
 
     type Calificaciones {
-        usuario: ID
+        usuario: User
         calificacion: Int
         comentario: String
         fecha_crecion: String
@@ -87,6 +87,27 @@ const typeDefs = `
         fecha_creacion: String
     }
 
+    type BookForUserLogin {
+        _id: String
+        codigo: String
+        titulo: String
+        descripcion: String
+        precio: Int
+        estado: String
+        categoria: [Categoria]
+        calificaciones: [Calificaciones]
+        formato: [Formato]
+        autores: [Autor]
+        proveedores: [Proveedor]
+        portada: String
+        imagenes: [String]
+        fecha_publicacion: String
+        fecha_actualizacion: String
+        fecha_creacion: String
+        is_favorite: Boolean
+        is_mine: Boolean
+    }
+
     input BookInput {
         codigo: String
         titulo: String
@@ -122,7 +143,6 @@ const typeDefs = `
         id_item: Int
         id_cart: Int
         id_book: Book
-        count: Int
         creation_date: String
     }
 
@@ -142,11 +162,15 @@ const typeDefs = `
     type Query{
         hello: String
         getBooks: [Book]
+        getBooksForUserLogin(ident: Int!): [BookForUserLogin]
         getBook(codigo: String!): Book
+        getBookForUserLogin(codigo: String!, ident: Int!): BookForUserLogin
         getAutores: [Autor]
         getCategoria: [Categoria]
         getProveedor: [Proveedor]
-        getCart(ident: Int!) : String
+        getCart(ident: Int!) : Cart
+        getFavorite(ident: Int!) : [Book]
+        getPurchased_books(ident: Int!) : [Book]
     }
 
     type Mutation {

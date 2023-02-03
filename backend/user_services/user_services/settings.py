@@ -38,8 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'user',
-    'user_account',
-    'user_methods',
     'rest_framework',
     'knox',
     'corsheaders',
@@ -62,9 +60,21 @@ CORS_ALLOW_ALL_ORIGINS = True # If this is used then `CORS_ALLOWED_ORIGINS` will
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:8080',
+    'http://localhost:4000',
+    'http://localhost:5000',
+    'http://localhost:3000',
 ] # If this is used, then not need to use `CORS_ALLOW_ALL_ORIGINS = True`
 CORS_ALLOWED_ORIGIN_REGEXES = [
     'http://localhost:8080',
+    'http://localhost:4000',
+    'http://localhost:5000',
+    'http://localhost:3000',
+]
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:8080',
+    'http://localhost:4000',
+    'http://localhost:5000',
+    'http://localhost:3000',
 ]
 
 ROOT_URLCONF = 'user_services.urls'
