@@ -49,6 +49,18 @@ class FavoritesView(APIView):
         post.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+class FavoriteBookView(APIView):
+    def get_object_by_book(self, dato, codigo):
+        try:
+            return Favorites.objects.filter(identification=dato).filter(id_book=codigo)
+        except Favorites.DoesNotExist:
+            raise Http404
+        
+    def get(self, request, pk, codigo, format=None):
+        post = self.get_object_by_book(pk, codigo)
+        serializer = FavoriteSerializer(post, many=True)  
+        return Response(serializer.data)    
+
 class CartView(APIView):
         
     def get_cart(self, id):
@@ -81,12 +93,46 @@ class ItemCartView(APIView):
         serializer = ItemCartSerializer(post, many=True)
         return Response(serializer.data) 
     
+    def put(self, request, pk, format=None):
+        post = self.get_items(pk)
+        serializer = ItemCartSerializer(post, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
     def delete(self, request, pk, format=None):
         post = self.get_item(pk)
         post.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
     
+class PurchasedView(APIView):
     
+    def get_object_by_user(self, ident):
+        try:
+            return Purchased_books.objects.filter(identification = ident)
+        except Purchased_books.DoesNotExist:
+            raise Http404
+    
+    def get(self, request, pk, format=None):
+        post = self.get_object_by_user(pk)
+        serializer = PurchasedBooksSerializer(post, many=True)
+        return Response(serializer.data) 
+
+class PurchasedBookView(APIView):
+    
+    def get_object_by_book(self, ident, codigo):
+        try:
+            return Purchased_books.objects.filter(identification = ident).filter(id_book=codigo)
+        except Purchased_books.DoesNotExist:
+            raise Http404
+    
+    def get(self, request, pk, codigo, format=None):
+        post = self.get_object_by_user(pk, codigo)
+        serializer = PurchasedBooksSerializer(post, many=True)
+        return Response(serializer.data) 
+
+
 """
 
 class CartView(APIView):
