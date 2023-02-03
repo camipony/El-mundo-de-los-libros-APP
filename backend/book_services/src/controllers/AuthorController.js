@@ -51,31 +51,13 @@ const add_author = async (req, res) => {
 
 const update_author = async (req, res) => {
     try {
-        const codigo = req.params;
+        const {codigo} = req.params;
         const data = req.body;
-        autor.findOne(codigo, (err, docs) => {
-            if(err){
-                res.status(400).json({
-                    msg: "Ha ocurrido un error",
-                    error: err
-                })
-                return
-            }
-            docs = data
-            docs.save((error, docs) => {
-                if(error){
-                    res.status(400).json({
-                        msg: "Ha ocurrido un erro",
-                        error: error
-                    })
-                    return
-                }
-                res.status(200).json({
-                    msg: "Autor actualizado",
-                    book: docs
-                })
-            })
-        } )
+        let docs = await autor.updateOne({_id: codigo}, data);
+        res.status(200).json({
+            msg: "Autor actualizado",
+            autor: docs
+        })
     } catch (error) {
         console.log(error)
         res.status(500).json({
