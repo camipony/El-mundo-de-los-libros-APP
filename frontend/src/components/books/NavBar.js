@@ -9,13 +9,26 @@ import logo from '../../assets/logo.png';
 
 const NavBar = () => {
     const navigate = useNavigate();
+<<<<<<< HEAD
+=======
+
+>>>>>>> a04def83222290edf4f3929a832070d1db62f614
     const routeChange = (number) => {
         if (number === "1") {
           navigate("/login");
         } else if (number === "2") {
           navigate("/register");
+<<<<<<< HEAD
       }
     }
+=======
+        } else if (number === "3") {
+          navigate("/books");
+        } else if (number === "5") {
+          navigate("/terms-and-conditions/client");
+        }
+      };
+>>>>>>> a04def83222290edf4f3929a832070d1db62f614
 
     return (
         <div>
@@ -51,12 +64,30 @@ const NavBar = () => {
             Libros
         </a>
         <a
+<<<<<<< HEAD
+=======
+            href="/ebooks"
+            className="xl:py-1 xl:px-2 rounded-lg hover:bg-gray-100 transition-colors"
+        >
+            Ebooks
+        </a>
+        <a
+>>>>>>> a04def83222290edf4f3929a832070d1db62f614
             href="/promos"
             className="xl:py-1 xl:px-2 rounded-lg hover:bg-gray-100 transition-colors"
         >
             Promociones
         </a>
         <a
+<<<<<<< HEAD
+=======
+            href="#"
+            className="xl:py-1 xl:px-2 rounded-lg hover:bg-gray-100 transition-colors"
+        >
+            Colecciones
+        </a>
+        <a
+>>>>>>> a04def83222290edf4f3929a832070d1db62f614
             href="/colecc"
             className="xl:py-1 xl:px-2 rounded-lg hover:bg-gray-100 transition-colors"
         >
@@ -92,9 +123,20 @@ const NavBar = () => {
             />
         </svg>
     </form>
+<<<<<<< HEAD
 </div>
         </div>
 
+=======
+
+</div>
+
+        </div>
+
+        
+        
+
+>>>>>>> a04def83222290edf4f3929a832070d1db62f614
           );
 
 };

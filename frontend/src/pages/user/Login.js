@@ -1,9 +1,17 @@
 import "tailwindcss/tailwind.css";
+<<<<<<< HEAD
 import React, { useContext, useEffect, useState } from 'react'
 import logo from "../../assets/logo_mdl.png";
 import "../../css/login.css";
 import { useNavigate } from "react-router-dom";
 //import Swal from "sweetalert2";
+=======
+import React, { useContext, useEffect, useState } from "react";
+import logo from "../../assets/logo_mdl.png";
+import "../../css/login.css";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+>>>>>>> a04def83222290edf4f3929a832070d1db62f614
 import UsuariosContext from "../../context/Usuario/usuariosContext";
 
 const Login = () => {
@@ -13,13 +21,19 @@ const Login = () => {
   });
 
   let usersContext = useContext(UsuariosContext);
+<<<<<<< HEAD
   let { datosUsuario, verificarInicioSesion, saveAutenticarUsuario } = usersContext;
+=======
+  let { datosUsuario, verificarInicioSesion, saveAutenticarUsuario } =
+    usersContext;
+>>>>>>> a04def83222290edf4f3929a832070d1db62f614
 
   const navigate = useNavigate();
 
   const handleChange = ({ target: { name, value } }) =>
     setUser({ ...user, [name]: value });
 
+<<<<<<< HEAD
   const onClick = ( e ) => {
     e.preventDefault();
     saveAutenticarUsuario(user)
@@ -35,6 +49,53 @@ const Login = () => {
     }
     return;
   }, [datosUsuario]);
+=======
+  const onClick = (e) => {
+    e.preventDefault();
+    console.log("Click")
+    saveAutenticarUsuario(user);
+    let timerInterval;
+    Swal.fire({
+      title: "verifying the information",
+      html: "Espera un momento validamos tu información",
+      timer: 2000,
+      timerProgressBar: true,
+      didOpen: () => {
+        Swal.showLoading();
+        /*const b = Swal.getHtmlContainer().querySelector("b");
+        timerInterval = setInterval(() => {
+          b.textContent = Swal.getTimerLeft();
+        }, 100);*/
+      },
+      willClose: () => {
+        clearInterval(timerInterval);
+      },
+    }).then((result) => {
+      if (datosUsuario.token) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Bienvenido',
+          text: ''
+        })
+        navigate("/dashboard");
+      }
+      else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'User not found'
+        })
+      }
+    });
+  };
+
+  useEffect(() => {
+    verificarInicioSesion();
+    if (datosUsuario.token) {
+      navigate("/dashboard");
+    }
+  }, []);
+>>>>>>> a04def83222290edf4f3929a832070d1db62f614
 
   return (
     <div className="min-h-screen bg-[#252831] grid grid-cols-1 lg:grid-cols-2">
@@ -44,10 +105,31 @@ const Login = () => {
           <h1 className="text-4xl font-medium">Iniciar sesión</h1>
         </div>
 
+<<<<<<< HEAD
         <form className="flex flex-col gap-4">
           <div>
             <label htmlFor="username" className="text-gray-200">
               Identificacion *
+=======
+        <div className="w-full">
+          <button
+            type="button"
+            className="w-full flex items-center justify-center gap-2 border p-2 px-4 rounded-full"
+          >
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/281/281764.png"
+              width="20"
+              height="20"
+            />
+            <span className="ml-2">Ingresar con Google</span>
+          </button>
+        </div>
+
+        <form className="flex flex-col gap-4">
+          <div>
+            <label htmlFor="username" className="text-gray-200">
+              Correo electrónico *
+>>>>>>> a04def83222290edf4f3929a832070d1db62f614
             </label>
             <input
               type="text"

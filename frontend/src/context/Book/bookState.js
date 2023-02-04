@@ -33,8 +33,13 @@ const BookState = (props) => {
 
   const getBooks = async (user = null) => {
     try {
+<<<<<<< HEAD
       let query = "";
       if (user != null) {
+=======
+      var query = "";
+      if (user == null) {
+>>>>>>> a04def83222290edf4f3929a832070d1db62f614
         query = gql`
           query {
             getBooks {
@@ -98,8 +103,13 @@ const BookState = (props) => {
 
   const getBook = async (codigo_book, user = null) => {
     try {
+<<<<<<< HEAD
       let query = "";
       if (user != null) {
+=======
+      var query = "";
+      if (user === null) {
+>>>>>>> a04def83222290edf4f3929a832070d1db62f614
         query = gql`
           query {
             getBook(codigo: ${codigo_book}) {
@@ -186,11 +196,19 @@ const BookState = (props) => {
           }
         `;
       }
+<<<<<<< HEAD
       let data = await client.query({ query });
       dispatch({
         type: "OBTENER_BOOK",
         payload:
           user != null ? data.data.getBookForUserLogin : data.data.getBook,
+=======
+      console.log(query)
+      let data = await client.query({ query });
+      dispatch({
+        type: "OBTENER_BOOK",
+        payload: user != null ? data.data.getBookForUserLogin : data.data.getBook,
+>>>>>>> a04def83222290edf4f3929a832070d1db62f614
       });
     } catch (error) {
       console.log(error);
