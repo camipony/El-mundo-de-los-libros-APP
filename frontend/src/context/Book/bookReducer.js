@@ -17,6 +17,21 @@ export default (state, action) => {
         ...state,
         books: payload
       }
+    case OBTENER_BOOK:
+      return {
+        ...state,
+        book: payload
+      }
+    case GET_BOOK_FAVORITES:
+      return {
+        ...state,
+        favoriteBooks: payload
+      }
+    case GET_BOOK_ADQUIRIDOS:
+      return {
+        ...state,
+        purchasedBooks: payload
+      }
     default:
       return state;
   }

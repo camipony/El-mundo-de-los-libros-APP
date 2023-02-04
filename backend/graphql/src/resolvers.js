@@ -32,16 +32,17 @@ export const resolvers = {
                 let favorite = await run_axios(rutaMicroUser+'/favorites/'+ident+'/')
                 let purchased = await run_axios(rutaMicroUser+'/purchased/'+ident+'/')
                 data.data.book = data.data.book.map(book => {
-                    let filter = favorite.data.filter(b => b.codigo === book.codigo)
-                    let filter2 = purchased.data.filter(b => b.codigo   === book.codigo)
-                    if(  filter && filter > 0 ){
+                    let filter = favorite.data.filter(b => b.id_book === book.codigo)
+                    let filter2 = purchased.data.filter(b => b.id_book   === book.codigo)
+                    console.log(purchased.data)
+                    if(  filter && filter.length > 0 ){
                         book.is_favorite = true
                     } 
                     else {
                         book.is_favorite = false
                     }
 
-                    if(  filter2 && filter2 > 0 ){
+                    if(  filter2 && filter2.length > 0 ){
                         book.is_mine = true
                     } 
                     else {
@@ -81,11 +82,11 @@ export const resolvers = {
                     data.data.book.is_favorite = false
                 }
 
-                if(  purchased.data && purchased.data > 0 ){
-                    book.is_mine = true
+                if(  purchased.data && purchased.data.length > 0 ){
+                    data.data.book.is_mine = true
                 } 
                 else {
-                    book.is_mine = false
+                    data.data.book.is_mine = false
                 }
 
                 return data.data.book

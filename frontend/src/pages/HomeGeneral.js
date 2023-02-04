@@ -1,8 +1,10 @@
 import "tailwindcss/tailwind.css";
 
-import React, { useRef, useState } from "react";  
+import React, { useRef, useState, useEffect, useContext } from "react";  
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
+import BookContext from '../context/Book/bookContext';
+import UsuariosContext from "../context/Usuario/usuariosContext";
 
 // Import Swiper styles
 import "swiper/css";
@@ -18,8 +20,19 @@ import Footer from "../components/books/Footer";
 import Bookmap from "../components/books/Bookmap";
 import NavBar from "../components/books/NavBar";
 
-
 const HomeGeneral = ()  => {  
+
+  let usersContext = useContext(UsuariosContext);
+  let { datosUsuario, verificarInicioSesion, saveAutenticarUsuario } = usersContext;
+
+  let bookContext = useContext(BookContext);
+  let { books, getBooks } = bookContext;
+
+  useEffect(() => {
+    // Update the document title using the browser API 
+    verificarInicioSesion()
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col">
       <NavBar/>
@@ -34,7 +47,7 @@ const HomeGeneral = ()  => {
  
           <div>
             <h1 className="text-4xl font-medium text-gray-800 p-4 gap-4">Novedades</h1>
-            <Bookmap />
+            <Bookmap user = {datosUsuario} />
           </div>
         </div>
       </main>

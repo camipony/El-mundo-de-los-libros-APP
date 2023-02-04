@@ -6,7 +6,7 @@ import { ApolloClient, InMemoryCache, HttpLink, ApolloProvider, gql, useQuery } 
 import BookContext from './../../context/Book/bookContext';
 import logo from '../../assets/logo.png'
 
-const Bookmap = () => {
+const Bookmap = (props) => {
 
   let bookContext = useContext(BookContext);
   let { books, getBooks } = bookContext;

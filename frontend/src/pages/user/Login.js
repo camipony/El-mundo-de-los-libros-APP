@@ -13,7 +13,7 @@ const Login = () => {
   });
 
   let usersContext = useContext(UsuariosContext);
-  let { datosUsuario, verificarInicioSecion, saveAutenticarUsuario } = usersContext;
+  let { datosUsuario, verificarInicioSesion, saveAutenticarUsuario } = usersContext;
 
   const navigate = useNavigate();
 
@@ -29,7 +29,7 @@ const Login = () => {
   };
 
   useEffect(() => {
-    verificarInicioSecion()
+    verificarInicioSesion()
     if(datosUsuario.token) {
       navigate("/");
     }

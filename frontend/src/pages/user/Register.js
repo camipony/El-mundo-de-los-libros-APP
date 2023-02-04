@@ -17,7 +17,7 @@ const Register = () => {
   });
 
   let usersContext = useContext(UsuariosContext);
-  let { datosUsuario, verificarInicioSecion, crearUsuario } = usersContext;
+  let { datosUsuario, verificarInicioSesion, crearUsuario } = usersContext;
 
   const onClick = (e) => {
     e.preventDefault();
@@ -28,7 +28,7 @@ const Register = () => {
   };
 
   useEffect(() => {
-    verificarInicioSecion()
+    verificarInicioSesion()
     if(datosUsuario.token) {
       navigate("/");
     }

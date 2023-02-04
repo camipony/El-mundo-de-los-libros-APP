@@ -3,6 +3,7 @@ import {
     OBTENER_USUARIO,
     AUTENTICAR_USUARIO,
     CREAR_USUARIO,
+    GET_CARRITO,
 } from '../type';
 
 export default (state, action) => {
@@ -23,6 +24,11 @@ export default (state, action) => {
             return {
                 ...state,
                 datosUsuario: payload,
+            }
+        case GET_CARRITO:
+            return {
+                ...state,
+                carrito: payload,
             }
         default:
             return state;
