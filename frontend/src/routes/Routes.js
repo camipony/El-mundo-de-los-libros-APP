@@ -4,6 +4,7 @@ import Login from "../pages/user/Login";
 import Home from "../pages/user/Home";
 import Register from "../pages/user/Register";
 import HomeGeneral from "../pages/HomeGeneral";
+import ContactUs from "../pages/books/ContacUs";
 import { ProtectedRoute } from "../pages/user/ProtectedRoute";
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/home" element={<HomeGeneral />} />
         <Route path="/" element={<HomeGeneral />} />
+        <Route path="/contact" element={<ContactUs />} />
       </Routes>
     </BrowserRouter>
   );
