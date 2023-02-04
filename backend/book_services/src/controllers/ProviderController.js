@@ -1,4 +1,3 @@
-const book = require('../database/models/Book');
 const provider = require('../database/models/Provider');
 
 const get_providers = async (req, res) => {
@@ -25,8 +24,8 @@ const get_providers = async (req, res) => {
 
 const get_provider = async (req, res) => {
     try {
-        const _id = req.params;
-        provider.findOne(_id, (err, docs) => {
+        const {id} = req.params;
+        provider.findOne({_id: id}, (err, docs) => {
             if(err){
                 res.status(400).json({
                     msg: "ha ocurrido un error",
@@ -48,7 +47,23 @@ const get_provider = async (req, res) => {
 
 const add_provider = async (req, res) => {
     try {
-        
+        const datos = req.body;
+        provider.create(
+            datos,
+            (err, docs) => {
+                if( err ){
+                    res.status(400).json({
+                        msg: "Ha ocurrido un error",
+                        error: err
+                    })
+                    return
+                }
+                res.status(201).json({
+                    msg: "Proveedor agregado con exito",
+                    data: docs
+                })
+            }
+        )
     } catch (error) {
         console.log(error)
         res.status(500).json({
@@ -59,7 +74,13 @@ const add_provider = async (req, res) => {
 
 const update_provider = async (req, res) => {
     try {
-        
+        const {id} = req.params;
+        const data = req.body;
+        let docs = provider.updateOne({_id: id}, data)
+        res.status(200).json({
+            msg: "Proveedor actualizado",
+            provider: docs
+        })
     } catch (error) {
         console.log(error)
         res.status(500).json({
@@ -70,7 +91,19 @@ const update_provider = async (req, res) => {
 
 const delete_provider = async (req, res) => {
     try {
-        
+        const {id} = req.params;
+        provider.deleteOne({_id: id}, (err) => {
+            if(err) {
+                res.status(400).json({
+                    msg: "Ha ocurrido un error",
+                    error: err
+                })
+                return 
+            }
+            res.status(200).json({
+                msg: "El proveedor fue eliminado"
+            })
+        })
     } catch (error) {
         console.log(error)
         res.status(500).json({
@@ -78,7 +111,6 @@ const delete_provider = async (req, res) => {
         })
     }
 }
-
 module.exports = {
     get_providers,
     get_provider,

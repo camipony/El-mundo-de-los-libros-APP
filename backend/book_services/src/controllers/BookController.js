@@ -1,4 +1,5 @@
 const book = require('../database/models/Book');
+const category = require('../database/models/Category');
 
 const get_books = async (req, res) => {
     try {
@@ -10,6 +11,7 @@ const get_books = async (req, res) => {
                 })
                 return
             }
+
             res.json({
                 book:docs
             })
@@ -88,7 +90,7 @@ const change_cover = async (req, res) => {
             docs.save((error, docs) => {
                 if(error){
                     res.status(400).json({
-                        msg: "Ha ocurrido un erro",
+                        msg: "Ha ocurrido un error",
                         error: error
                     })
                     return
@@ -134,29 +136,15 @@ const update_book = async (req, res) => {
     try {
         const codigo = req.params;
         const data = req.body;
-        book.findOne(codigo, (err, docs) => {
-            if(err){
-                res.status(400).json({
-                    msg: "Ha ocurrido un error",
-                    error: err
-                })
-                return
-            }
-            docs = data
-            docs.save((error, docs) => {
-                if(error){
-                    res.status(400).json({
-                        msg: "Ha ocurrido un erro",
-                        error: error
-                    })
-                    return
-                }
-                res.status(200).json({
-                    msg: "Libro actualizado",
-                    book: docs
-                })
-            })
+        data.calificaciones = data.calificaciones.map( calif => {
+            calif.usuario = parseInt(calif.usuario.username)
+            return calif
         } )
+        let docs = await book.updateOne(codigo, data);
+        res.status(200).json({
+            msg: "Libro actualizado",
+            book: docs
+        })
     } catch (error) {
         console.log(error)
         res.status(500).json({

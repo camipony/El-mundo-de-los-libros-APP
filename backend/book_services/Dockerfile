@@ -1,6 +1,6 @@
 FROM node:16
 
-WORKDIR /book_service
+WORKDIR /book_services
 
 COPY package*.json ./
 

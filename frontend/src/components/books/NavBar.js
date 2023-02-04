@@ -2,11 +2,21 @@ import "tailwindcss/tailwind.css";
 import { Person } from "@mui/icons-material";
 import { Button } from "@mui/material";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { useNavigate } from "react-router-dom";
 import "../../css/navbar.css";
 import logo from '../../assets/logo.png';
 
 
 const NavBar = () => {
+    const navigate = useNavigate();
+    const routeChange = (number) => {
+        if (number === "1") {
+          navigate("/login");
+        } else if (number === "2") {
+          navigate("/register");
+      }
+    }
+
     return (
         <div>
         <div className="menu_home">
@@ -15,6 +25,7 @@ const NavBar = () => {
               variant="outlined"
               style={{ color: "white", border: "none" }}
               endIcon={<Person />}
+              onClick={(number) => routeChange("1")}
             >
               Ingresar
             </Button>
@@ -23,6 +34,7 @@ const NavBar = () => {
               variant="outlined"
               style={{ color: "white", border: "none" }}
               endIcon={<ShoppingCartIcon/>}
+              onClick={(number) => routeChange("1")}
             >
               Carrito
             </Button>
@@ -33,37 +45,25 @@ const NavBar = () => {
    
     <nav className="md:col-span-6 flex items-center">
         <a
-            href="#"
+            href="/books"
             className="xl:py-1 xl:px-2 rounded-lg hover:bg-gray-100 transition-colors"
         >
             Libros
         </a>
         <a
-            href="#"
-            className="xl:py-1 xl:px-2 rounded-lg hover:bg-gray-100 transition-colors"
-        >
-            Ebooks
-        </a>
-        <a
-            href="#"
+            href="/promos"
             className="xl:py-1 xl:px-2 rounded-lg hover:bg-gray-100 transition-colors"
         >
             Promociones
         </a>
         <a
-            href="#"
-            className="xl:py-1 xl:px-2 rounded-lg hover:bg-gray-100 transition-colors"
-        >
-            Colecciones
-        </a>
-        <a
-            href="#"
+            href="/colecc"
             className="xl:py-1 xl:px-2 rounded-lg hover:bg-gray-100 transition-colors"
         >
             Ferias
         </a>
         <a
-            href="#"
+            href="/contact-us"
             className="xl:py-1 xl:px-2 rounded-lg hover:bg-gray-100 transition-colors"
         >
             Contáctanos
@@ -92,13 +92,8 @@ const NavBar = () => {
             />
         </svg>
     </form>
-
 </div>
-
         </div>
-
-        
-        
 
           );
 

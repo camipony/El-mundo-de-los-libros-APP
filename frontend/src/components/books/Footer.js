@@ -3,12 +3,8 @@ import logo from '../../assets/logo.png'
 import daviplata from '../../assets/daviplata.png'
 import bancolombia from '../../assets/bancolombia.png'
 import mercado from '../../assets/mercadopago.png'
-import FacebookIcon from '@mui/icons-material/Facebook';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+import {Facebook, WhatsApp, Instagram} from '@mui/icons-material';
 import "../../css/footer.css";
-
-
 
 function Footer() {
   return (
@@ -18,9 +14,9 @@ function Footer() {
           <div className="col-sm">
           <img src={logo} alt="logo" style={{width: '130px' , marginTop: '10px'}}/>
             <div className = "frameImgIcons">
-            <FacebookIcon style={{fontSize: '30px', margin: '0px 15px 0 -55px'}}/>
-            <InstagramIcon style={{fontSize: '30px' , margin: '0px 15px 0 0px'}}/>
-            <WhatsAppIcon style={{fontSize: '30px'}} />
+            <Facebook style={{fontSize: '30px', margin: '0px 15px 0 -55px'}}/>
+            <Instagram style={{fontSize: '30px' , margin: '0px 15px 0 0px'}}/>
+            <WhatsApp style={{fontSize: '30px'}} />
             </div>
           </div>
           <div className="col-sm">
