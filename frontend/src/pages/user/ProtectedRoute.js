@@ -1,12 +1,15 @@
-import { useAuth } from "../../context/authContext";
+
+import React, { useContext, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 
+import UsuariosContext from "../../context/Usuario/usuariosContext";
+
 export function ProtectedRoute({children}){
-    const {user , loading } = useAuth();
+    let usersContext = useContext(UsuariosContext);
+    let { datosUsuario } = usersContext;
 
-    if(loading) return <h1>Loading</h1> 
 
-    if(!user) return <Navigate to= '/login' />
+    if(!datosUsuario.token) return <Navigate to= '/login' />
 
     return <>{children}</>
 }

@@ -1,0 +1,121 @@
+
+.cont-migapan {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 20px;
+}
+
+.cont-migapan .link-a{
+    font-size: 18px;
+    font-weight: 400;
+    color: gray;
+}
+
+.cont-migapan .link-a::after{
+    content: ' > ';
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: gray;
+}
+
+.cont-migapan :nth-child(3)::after {
+    content: '';
+}
+
+.cont-migapan :nth-child(3) {
+    color: black;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.body-detailt {
+    width: 80%;
+    margin: auto;
+}
+
+.body-detailt .cont-info-book {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.body-detailt .cont-info-book .cont-img{
+    width: calc(100% - 400px);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+}
+
+.body-detailt .cont-info-book .cont-img .img-preview {
+    height: 350px;
+    object-fit: cover;
+}
+
+.body-detailt .cont-info-book .cont-img .mas-imagenes{
+    width: 100%;
+    height: 120px;
+    background: red;
+}
+
+.body-detailt .cont-info-book .cont-info{
+    width: 400px;
+}
+
+.body-detailt .cont-info-book .cont-info .cont-btn-accion{
+    width: 100%;
+    text-align: right;
+}
+
+.body-detailt .cont-info-book .cont-info h1{
+    font-size: 30px;
+    font-weight: 800;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.body-detailt .cont-info-book .cont-info p{
+    text-align: left;
+    margin: 0;
+    padding: 0;
+    padding-left: 10px;
+    margin-bottom: 5px;
+    font-weight: 400;
+}
+
+.body-detailt .cont-info-book .cont-info p span {
+    font-weight: 700;
+}
+
+.body-detailt .cont-info-book .cont-info .cont-btn-accion button{
+    width: 45px;
+    height: 45px;
+    font-size: 30px;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 10px;
+    border: none;
+    background: rgb(218, 215, 215);
+}
+
+.body-detailt .cont-acordeon{
+    width: 100%;
+}
+
+.body-detailt .cont-carrusel{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.body-detailt .cont-info-book .cont-info h2{
+    font-size: 40px;
+    font-weight: 900;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
