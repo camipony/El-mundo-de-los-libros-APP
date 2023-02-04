@@ -9,18 +9,13 @@ import logo from '../../assets/logo.png';
 
 const NavBar = () => {
     const navigate = useNavigate();
-
     const routeChange = (number) => {
         if (number === "1") {
           navigate("/login");
         } else if (number === "2") {
           navigate("/register");
-        } else if (number === "3") {
-          navigate("/books");
-        } else if (number === "5") {
-          navigate("/terms-and-conditions/client");
-        }
-      };
+      }
+    }
 
     return (
         <div>
@@ -56,22 +51,10 @@ const NavBar = () => {
             Libros
         </a>
         <a
-            href="/ebooks"
-            className="xl:py-1 xl:px-2 rounded-lg hover:bg-gray-100 transition-colors"
-        >
-            Ebooks
-        </a>
-        <a
             href="/promos"
             className="xl:py-1 xl:px-2 rounded-lg hover:bg-gray-100 transition-colors"
         >
             Promociones
-        </a>
-        <a
-            href="#"
-            className="xl:py-1 xl:px-2 rounded-lg hover:bg-gray-100 transition-colors"
-        >
-            Colecciones
         </a>
         <a
             href="/colecc"
@@ -109,13 +92,8 @@ const NavBar = () => {
             />
         </svg>
     </form>
-
 </div>
-
         </div>
-
-        
-        
 
           );
 

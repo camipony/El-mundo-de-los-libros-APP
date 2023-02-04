@@ -24,7 +24,7 @@ const Login = () => {
     e.preventDefault();
     saveAutenticarUsuario(user)
     if(datosUsuario.token) {
-      navigate("/");
+      navigate("/dashboard");
     }
   };
 
@@ -44,24 +44,10 @@ const Login = () => {
           <h1 className="text-4xl font-medium">Iniciar sesión</h1>
         </div>
 
-        <div className="w-full">
-          <button
-            type="button"
-            className="w-full flex items-center justify-center gap-2 border p-2 px-4 rounded-full"
-          >
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/281/281764.png"
-              width="20"
-              height="20"
-            />
-            <span className="ml-2">Ingresar con Google</span>
-          </button>
-        </div>
-
         <form className="flex flex-col gap-4">
           <div>
             <label htmlFor="username" className="text-gray-200">
-              Correo electrónico *
+              Identificacion *
             </label>
             <input
               type="text"
