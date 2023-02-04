@@ -1,0 +1,20 @@
+.bg {
+    background-image: url("../assets/imageRegister.png");
+    background-size: 90%;
+    background-position: 20%;
+  }
+
+  .outline-none{
+    color: rgb(156 163 175 / var(--tw-text-opacity));
+  }
+
+  .text-gray-400:hover{
+    color: black;
+  }
+
+  p{
+    color: rgb(185, 11, 11);
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+  }
