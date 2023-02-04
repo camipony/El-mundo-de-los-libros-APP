@@ -1,0 +1,9 @@
+.menu_home .frame1{
+    width: 100%;
+    height: 40px;
+    color: white;
+    text-align: right;
+    padding: 5px;
+    background-color: #665F51;
+    font-family: 'Poppins';
+}
