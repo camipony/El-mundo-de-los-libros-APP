@@ -4,6 +4,7 @@ import Login from "../pages/user/Login";
 import Home from "../pages/user/Home";
 import Register from "../pages/user/Register";
 import HomeGeneral from "../pages/HomeGeneral";
+import DetailtBook from "../pages/user/detailtBook";
 import { ProtectedRoute } from "../pages/user/ProtectedRoute";
 
 function App() {
@@ -21,6 +22,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/home" element={<HomeGeneral />} />
+        <Route path="/books" element={<HomeGeneral />} />
+        <Route path="/books/:codigobook" element={<DetailtBook />} />
         <Route path="/" element={<HomeGeneral />} />
       </Routes>
     </BrowserRouter>

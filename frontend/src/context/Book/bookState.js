@@ -33,8 +33,8 @@ const BookState = (props) => {
 
   const getBooks = async (user = null) => {
     try {
-      let query = "";
-      if (user != null) {
+      var query = "";
+      if (user == null) {
         query = gql`
           query {
             getBooks {
@@ -98,8 +98,8 @@ const BookState = (props) => {
 
   const getBook = async (codigo_book, user = null) => {
     try {
-      let query = "";
-      if (user != null) {
+      var query = "";
+      if (user === null) {
         query = gql`
           query {
             getBook(codigo: ${codigo_book}) {
@@ -186,11 +186,11 @@ const BookState = (props) => {
           }
         `;
       }
+      console.log(query)
       let data = await client.query({ query });
       dispatch({
         type: "OBTENER_BOOK",
-        payload:
-          user != null ? data.data.getBookForUserLogin : data.data.getBook,
+        payload: user != null ? data.data.getBookForUserLogin : data.data.getBook,
       });
     } catch (error) {
       console.log(error);
