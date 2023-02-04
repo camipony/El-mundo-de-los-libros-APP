@@ -49,6 +49,7 @@ const HomeGeneral = () => {
 
           <div>
             <h1 className="text-4xl font-medium text-gray-800 p-4 gap-4">Novedades</h1>
+            
             <Swiper
         slidesPerView={3}
         spaceBetween={30}
@@ -62,7 +63,7 @@ const HomeGeneral = () => {
         modules={[Keyboard, Pagination, Navigation]}
         className="mySwiper"
       >
-        <SwiperSlide>Slide 1</SwiperSlide>
+        <SwiperSlide><Bookmap /></SwiperSlide>
         <SwiperSlide>Slide 2</SwiperSlide>
         <SwiperSlide>Slide 3</SwiperSlide>
         <SwiperSlide>Slide 4</SwiperSlide>

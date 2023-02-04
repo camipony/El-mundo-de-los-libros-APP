@@ -17,6 +17,7 @@ const Bookmap = (props) => {
     // Update the document title using the browser API 
     getBooks()
     setCards(books)
+    console.log("book "+books)
   }, []);
 
   return (

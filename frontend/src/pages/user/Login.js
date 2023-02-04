@@ -33,8 +33,7 @@ const Login = () => {
     if(datosUsuario.token) {
       navigate("/");
     }
-    return;
-  }, [datosUsuario]);
+  }, []);
 
   return (
     <div className="min-h-screen bg-[#252831] grid grid-cols-1 lg:grid-cols-2">
