@@ -12,27 +12,25 @@ export const resolvers = {
         hello: () => {
             return "Hello world!"
         },
-        getBooks: () => {
+        getBooks: async () => {
             try {
-                let data = run_axios(rutaMicroBook + '/books')
-                data.data.book.calificaciones = get_calificacion(
-                    data.data.book.calificaciones, 
-                    rutaMicroUser+'/user/'+calif.usuario+'/'
+                let data = await run_axios(rutaMicroBook + '/books')
+                data.data.book.calificaciones = await get_calificacion(
+                    data.data.book.calificaciones
                 )
                 return data.data.book
             } catch (error) {
                 console.log(error)
             }
         },
-        getBooksForUserLogin: (_, {ident}) => {
+        getBooksForUserLogin: async (_, {ident}) => {
             try {
-                let data = run_axios(rutaMicroBook + '/books')
-                data.data.book.calificaciones = get_calificacion(
-                    data.data.book.calificaciones, 
-                    rutaMicroUser+'/user/'+calif.usuario+'/'
+                let data = await run_axios(rutaMicroBook + '/books')
+                data.data.book.calificaciones = await get_calificacion(
+                    data.data.book.calificaciones
                 )
-                let favorite = run_axios(rutaMicroUser+'/favorites/'+ident+'/')
-                let purchased = run_axios(rutaMicroUser+'/purchased/'+ident+'/')
+                let favorite = await run_axios(rutaMicroUser+'/favorites/'+ident+'/')
+                let purchased = await run_axios(rutaMicroUser+'/purchased/'+ident+'/')
                 data.data.book = data.data.book.map(book => {
                     let filter = favorite.data.filter(b => b.codigo === book.codigo)
                     let filter2 = purchased.data.filter(b => b.codigo   === book.codigo)
@@ -57,27 +55,25 @@ export const resolvers = {
                 console.log(error)
             }
         },
-        getBook: (root, {codigo}) => {
+        getBook: async (root, {codigo}) => {
             try {
-                let data = run_axios(rutaMicroBook + '/book/' + codigo)
-                data.data.book.calificaciones = get_calificacion(
-                    data.data.book.calificaciones, 
-                    rutaMicroUser+'/user/'+calif.usuario+'/'
+                let data = await run_axios(rutaMicroBook + '/book/' + codigo)
+                data.data.book.calificaciones = await get_calificacion(
+                    data.data.book.calificaciones
                 )
                 return data.data.book
             } catch (error) {
                 console.log(error)
             }
         },
-        getBookForUserLogin: (_, {codigo, ident}) => {
+        getBookForUserLogin: async (_, {codigo, ident}) => {
             try {
-                let data = run_axios(rutaMicroBook + '/book/' + codigo)
-                data.data.book.calificaciones = get_calificacion(
-                    data.data.book.calificaciones, 
-                    rutaMicroUser+'/user/'+calif.usuario+'/'
+                let data = await run_axios(rutaMicroBook + '/book/' + codigo)
+                data.data.book.calificaciones = await get_calificacion(
+                    data.data.book.calificaciones
                 )
-                let favorite = run_axios(rutaMicroUser+'/favoritesbook/'+ident+'/'+codigo+'/')
-                let purchased = run_axios(rutaMicroUser+'/purchasedbook/'+ident+'/'+codigo+'/')
+                let favorite = await run_axios(rutaMicroUser+'/favoritesbook/'+ident+'/'+codigo+'/')
+                let purchased = await run_axios(rutaMicroUser+'/purchasedbook/'+ident+'/'+codigo+'/')
                 if( favorite.data && favorite.data.length > 0 ){
                     data.data.book.is_favorite = true
                 } 
@@ -97,38 +93,38 @@ export const resolvers = {
                 console.log(error)
             }
         },
-        getAutores: () => {
+        getAutores: async () => {
             try {
-                let data = run_axios(rutaMicroBook + '/autores')
+                let data = await run_axios(rutaMicroBook + '/autores')
                 return data.data.autores
             } catch (error) {
                 console.log(error)
             }
         },
-        getCategoria: () => {
+        getCategoria: async () => {
             try {
-                let data = run_axios(rutaMicroBook + '/categorias')
+                let data = await run_axios(rutaMicroBook + '/categorias')
                 return data.data.categories
             } catch (error) {
                 console.log(error)
             }
         },
-        getProveedor: () => {
+        getProveedor: async () => {
             try {
-                let data = run_axios(rutaMicroBook + '/providers')
+                let data = await run_axios(rutaMicroBook + '/providers')
                 return data.data.categories
             } catch (error) {
                 console.log(error)
             }
         },
-        getCart: (_, {ident}) => {
+        getCart: async (_, {ident}) => {
             try {
-                let data = run_axios(rutaMicroUser + '/cart/' + ident +'/')
-                const items = run_axios(rutaMicroUser + '/item/' + data.data[0].id_cart + '/')
+                let data = await run_axios(rutaMicroUser + '/cart/' + ident +'/')
+                const items = await run_axios(rutaMicroUser + '/item/' + data.data[0].id_cart + '/')
                 let itemsBook = items.data 
 
                 itemsBook = itemsBook.map(async item => {
-                    let book = run_axios(rutaMicroBook + '/book/' + item.id_book)
+                    let book = await run_axios(rutaMicroBook + '/book/' + item.id_book)
                     item.id_book = book.data.book
                     return item
                 })
@@ -139,11 +135,11 @@ export const resolvers = {
                 console.log(error.message)
             }
         },
-        getFavorite: (_, {ident}) => {
+        getFavorite: async (_, {ident}) => {
             try {
-                let data = run_axios(rutaMicroUser+'/favorites/'+ident+'/')
-                let book = data.data.map(async favorites => {
-                    let book = run_axios(rutaMicroBook + '/book/' + favorites.id_book)
+                let data = await run_axios(rutaMicroUser+'/favorites/'+ident+'/')
+                let book = await data.data.map(async favorites => {
+                    let book = await run_axios(rutaMicroBook + '/book/' + favorites.id_book)
                     return book.data.book
                 })
                 return book
@@ -151,11 +147,11 @@ export const resolvers = {
                 console.log(error)
             }
         },
-        getPurchased_books: (_, {ident}) => {
+        getPurchased_books: async (_, {ident}) => {
             try {
-                let data = run_axios(rutaMicroUser+'/purchased/'+ident+'/')
+                let data = await run_axios(rutaMicroUser+'/purchased/'+ident+'/')
                 let book = data.data.map(async purchased => {
-                    let book = run_axios(rutaMicroBook + '/book/' + purchased.id_book)
+                    let book = await run_axios(rutaMicroBook + '/book/' + purchased.id_book)
                     return book.data.book
                 })
                 return book

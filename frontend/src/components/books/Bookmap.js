@@ -1,61 +1,22 @@
 import "tailwindcss/tailwind.css";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Card from "./Card";
-import { ApolloClient, InMemoryCache, HttpLink, ApolloProvider, gql, useQuery } from '@apollo/client';
-const axios = require("axios");
 
+import { ApolloClient, InMemoryCache, HttpLink, ApolloProvider, gql, useQuery } from '@apollo/client';
+import BookContext from './../../context/Book/bookContext';
+import logo from '../../assets/logo.png'
 
 const Bookmap = () => {
+
+  let bookContext = useContext(BookContext);
+  let { books, getBooks } = bookContext;
+
   const [cards, setCards] = useState([]);
-
-  const client = new ApolloClient({
-    cache: new InMemoryCache(),
-    link: new HttpLink({
-      uri: 'http://localhost:5000/graphql',
-
-    })
-  })
-
-  const get_books = async (req, res) => {
-    try {
-      const query = gql`
-        query{
-          getBooks {
-            _id
-            codigo
-            titulo
-            descripcion
-            precio
-            estado
-            portada
-            autores {
-              _id
-              nombre
-              pseudonimo
-            }
-    fecha_publicacion
-    fecha_actualizacion
-    fecha_creacion
-  }
-}
-    }
-    `
-      client.query({ query })
-        .then((response) => {
-          console.log(response.data.getBooks)
-          setCards(...cards, response.data.getBooks);
-
-        })
-
-    } catch (e) {
-      console.log("hola")
-    }
-  }
-
 
   useEffect(() => {
     // Update the document title using the browser API 
-    get_books()
+    getBooks()
+    setCards(books)
   }, []);
 
   return (
@@ -65,11 +26,17 @@ const Bookmap = () => {
           <Card
             img={card.portada}
             title={card.titulo}
-            autor = {card.autores.nombre} //revisar
+            autor = {card.autores && card.autores.length > 0 ? card.autores[0].nombre : "Anonimo"} //revisar
             price={card.precio}
           />
         );
-      }) : ""}
+      }) : <Card
+          img={logo}
+          title={"Titulo"}
+          autor = {"Autor"} //revisar
+          price={"00000"}
+        />
+      }
     </div>
   );
 };

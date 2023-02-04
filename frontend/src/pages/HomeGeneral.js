@@ -33,7 +33,7 @@ const HomeGeneral = ()  => {
         <div className="flex-1 h-full overflow">
  
           <div>
-            <h1 h1 className="text-4xl font-medium text-gray-800 p-4 gap-4">Novedades</h1>
+            <h1 className="text-4xl font-medium text-gray-800 p-4 gap-4">Novedades</h1>
             <Bookmap />
           </div>
         </div>
