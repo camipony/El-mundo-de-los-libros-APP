@@ -13,8 +13,7 @@ const Login = () => {
   });
 
   let usersContext = useContext(UsuariosContext);
-  let { datosUsuario, verificarInicioSesion, saveAutenticarUsuario } =
-    usersContext;
+  let { datosUsuario, verificarInicioSesion, saveAutenticarUsuario } = usersContext;
 
   const navigate = useNavigate();
 
@@ -23,49 +22,47 @@ const Login = () => {
 
   const onClick = (e) => {
     e.preventDefault();
-    console.log("Click")
+    console.log("Click");
     saveAutenticarUsuario(user);
-    let timerInterval;
+    console.log(datosUsuario)
     Swal.fire({
       title: "verifying the information",
       html: "Espera un momento validamos tu información",
-      timer: 2000,
+      timer: 3000,
       timerProgressBar: true,
       didOpen: () => {
         Swal.showLoading();
-        /*const b = Swal.getHtmlContainer().querySelector("b");
-        timerInterval = setInterval(() => {
-          b.textContent = Swal.getTimerLeft();
-        }, 100);*/
-      },
-      willClose: () => {
-        clearInterval(timerInterval);
-      },
+      }
     }).then((result) => {
+      validar()
       if (datosUsuario.token) {
         Swal.fire({
           icon: 'success',
           title: 'Bienvenido',
-          text: ''
+          showConfirmButton: false,
+          timer: 1500
         })
         navigate("/dashboard");
-      }
-      else {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'User not found'
-        })
-      }
+      } 
     });
   };
 
-  useEffect(() => {
-    verificarInicioSesion();
-    if (datosUsuario.token) {
+  const validar = () => {
+    if (!datosUsuario.token)  verificarInicioSesion();
+    else {
+      Swal.fire({
+        icon: 'success',
+        title: 'Bienvenido',
+        showConfirmButton: false,
+        timer: 1500
+      })
       navigate("/dashboard");
     }
-  }, []);
+  }
+
+  useEffect(() => {
+    validar()
+  }, [[]]);
 
   return (
     <div className="min-h-screen bg-[#252831] grid grid-cols-1 lg:grid-cols-2">

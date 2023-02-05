@@ -13,11 +13,11 @@ const Bookmap = (props) => {
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
-    // Update the document title using the browser API 
-    getBooks()
-    setCards(books)
-    console.log("book "+books)
-  }, []);
+    if( books && books.length > 0 ) setCards(books)
+    else {
+      getBooks()
+    }
+  }, [books]);
 
   return (
     <div className="flex md:grid md:grid-cols-2 xl:flex items-center justify-around lg:justify-between flex-wrap gap-6 p-2">
@@ -28,6 +28,7 @@ const Bookmap = (props) => {
             title={card.titulo}
             autor = {card.autores && card.autores.length > 0 ? card.autores[0].nombre : "Anonimo"} //revisar
             price={card.precio}
+            codigo = {card.codigo}
           />
         );
       }) : <Card key = {0}

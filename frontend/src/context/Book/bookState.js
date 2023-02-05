@@ -13,7 +13,8 @@ import BookContext from "./bookContext";
 import BookReducer from "./bookReducer";
 
 const BookState = (props) => {
-  const ruta = "http://localhost:4000";
+  const bookR = "http://localhost:4000";
+  const userR = "http://127.0.0.1:8000";
 
   const client = new ApolloClient({
     cache: new InMemoryCache(),
@@ -25,8 +26,8 @@ const BookState = (props) => {
   const inicialState = {
     books: null,
     book: {},
-    favoriteBooks: null,
-    purchasedBooks: null,
+    favoriteBooks: [],
+    purchasedBooks: [],
   };
 
   const [state, dispatch] = useReducer(BookReducer, inicialState);
@@ -98,11 +99,11 @@ const BookState = (props) => {
 
   const getBook = async (codigo_book, user = null) => {
     try {
-      var query = "";
+      /*var query = ``;
       if (user === null) {
         query = gql`
-          query {
-            getBook(codigo: ${codigo_book}) {
+          query getBook($cod: String!) {
+            getBook(codigo: $cod) {
               _id
               codigo
               titulo
@@ -186,14 +187,14 @@ const BookState = (props) => {
           }
         `;
       }
-      console.log(query)
-      let data = await client.query({ query });
+      let data = await client.query({ query }, {cod: codigo_book});*/
+      let data = await axios.get(bookR+'/book/'+codigo_book);
       dispatch({
         type: "OBTENER_BOOK",
-        payload: user != null ? data.data.getBookForUserLogin : data.data.getBook,
+        payload: data.data.book
       });
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   };
 
@@ -226,6 +227,51 @@ const BookState = (props) => {
       dispatch({
         type: "GET_BOOK_FAVORITES",
         payload: data.data.getFavorite,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const addFavoriteBook = async (book, user) => {
+    try {
+      let favorite = {
+        identification: user,
+        id_book: book.codigo,
+      };
+      let data = await axios.post(userR + "/api/favorites/", favorite);
+      dispatch({
+        type: "ADD_FAVORITES",
+        payload: book,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const deleteFavoriteBook = async (book, user) => {
+    try {
+      let data = await axios.get(
+        userR + "/favoritesbook/" + user + "/" + book + "/"
+      );
+      await axios.delete(
+        userR + "/api/favorites/" + data.data[0].id_favorites + "/"
+      );
+      dispatch({
+        type: "DELETE_FAVORITES",
+        payload: book,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const MakeAPurchase = async (user) => {
+    try {
+      await axios.delete(userR + "/pay/" + user + "/");
+      dispatch({
+        type: "PAY",
+        payload: user,
       });
     } catch (error) {
       console.log(error);
@@ -265,7 +311,7 @@ const BookState = (props) => {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   return (
     <BookContext.Provider
@@ -277,7 +323,10 @@ const BookState = (props) => {
         getBooks,
         getBook,
         getFavoriteBook,
-        getPurchaseBook
+        getPurchaseBook,
+        addFavoriteBook,
+        deleteFavoriteBook,
+        MakeAPurchase,
       }}
     >
       {props.children}

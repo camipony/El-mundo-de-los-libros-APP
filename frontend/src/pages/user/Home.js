@@ -10,7 +10,8 @@ export default function Home() {
 
   const navigate = useNavigate();
 
-  const handleLogout = async () => {
+  const handleLogout = (e) => {
+    e.preventDefault();
     cerrarSesion();
     navigate("/");
   };

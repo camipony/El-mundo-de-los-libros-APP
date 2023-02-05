@@ -8,7 +8,6 @@ export function ProtectedRoute({children}){
     let usersContext = useContext(UsuariosContext);
     let { datosUsuario } = usersContext;
 
-
     if(!datosUsuario.token) return <Navigate to= '/login' />
 
     return <>{children}</>

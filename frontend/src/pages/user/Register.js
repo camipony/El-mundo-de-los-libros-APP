@@ -23,14 +23,15 @@ const Register = () => {
     e.preventDefault();
     crearUsuario(user);
     if(datosUsuario.token) {
-      navigate("/");
+      window.localStorage.setItem("user-token", JSON.stringify(datosUsuario));
+      navigate("/dashboard");
     }
   };
 
   useEffect(() => {
     verificarInicioSesion()
     if(datosUsuario.token) {
-      navigate("/");
+      navigate("/dashboard");
     }
     return;
   }, [datosUsuario]);
