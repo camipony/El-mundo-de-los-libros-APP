@@ -78,6 +78,8 @@ const UsuariosState = (props) => {
   const crearUsuario = async (datos) => {
     try {
       const resp = await axios.post(ruta + "/register/", datos);
+      console.log(datos)
+      window.localStorage.setItem("user-token", JSON.stringify(resp.data));
       dispatch({
         type: "CREAR_USUARIO",
         payload: resp.data,
