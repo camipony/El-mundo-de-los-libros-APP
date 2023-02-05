@@ -4,13 +4,6 @@ import Footer from "../../components/books/Footer";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.png";
 
-import { Fragment } from "react";
-import {
-  Accordion,
-  AccordionHeader,
-  AccordionBody,
-} from "@material-tailwind/react";
-
 import "../../css/detailtBook.css";
 
 import BookContext from "../../context/Book/bookContext";
@@ -36,10 +29,10 @@ export default function DetailtBook() {
     <div className="min-h-screen flex flex-col">
       <NavBar />
       <div className="cont-migapan">
-        <Link to="" className="iconHome link-a">
+        <Link to="/" className="iconHome link-a">
           <ion-icon name="home-outline"></ion-icon>
         </Link>
-        <Link to="" className="link-a">
+        <Link to="/books" className="link-a">
           Libros
         </Link>
         <Link to="" className="link-a">
@@ -71,8 +64,8 @@ export default function DetailtBook() {
               {book && book.autores
                 ? book.autores.length > 0
                   ? book.autores[0].nombre
-                  : "Nombre del autor"
-                : "Nombre del autor"}
+                  : "Anonimo"
+                : "Anonimo"}
             </p>
             <p>
               <span>Publicado(a): </span>
@@ -111,45 +104,53 @@ export default function DetailtBook() {
           </div>
         </div>
         <div className="cont-acordeon">
-          <Fragment>
-            <Accordion open={open === 1} disabled>
-              <AccordionHeader onClick={() => handleOpen(1)}>
-                What is Material Tailwind?
-              </AccordionHeader>
-              <AccordionBody>
-                We&apos;re not always in the position that we want to be at.
-                We&apos;re constantly growing. We&apos;re constantly making
-                mistakes. We&apos;re constantly trying to express ourselves and
-                actualize our dreams.
-              </AccordionBody>
-            </Accordion>
-            <Accordion open={open === 2}>
-              <AccordionHeader onClick={() => handleOpen(2)}>
-                How to use Material Tailwind?
-              </AccordionHeader>
-              <AccordionBody>
-                We&apos;re not always in the position that we want to be at.
-                We&apos;re constantly growing. We&apos;re constantly making
-                mistakes. We&apos;re constantly trying to express ourselves and
-                actualize our dreams.
-              </AccordionBody>
-            </Accordion>
-            <Accordion open={open === 3}>
-              <AccordionHeader onClick={() => handleOpen(3)}>
-                What can I do with Material Tailwind?
-              </AccordionHeader>
-              <AccordionBody>
-                We&apos;re not always in the position that we want to be at.
-                We&apos;re constantly growing. We&apos;re constantly making
-                mistakes. We&apos;re constantly trying to express ourselves and
-                actualize our dreams.
-              </AccordionBody>
-            </Accordion>
-          </Fragment>
+          <div className={open === 3 ? "acordeon show" : "acordeon"}>
+            <div className="header-acordeon">
+              <h2>Descripcion del producto</h2>
+              <button onClick={() => handleOpen(3)}>
+                {open === 3 ? (
+                  <ion-icon name="caret-up-outline"></ion-icon>
+                ) : (
+                  <ion-icon name="caret-down-outline"></ion-icon>
+                )}
+              </button>
+            </div>
+            <div className="body-acordeon">
+              <p>{book && book.descripcion ? book.descripcion : ""}</p>
+              <p>fecha_publicacion: {book && book.fecha_publicacion ? book.fecha_publicacion : ""}</p>
+            </div>
+          </div>
+          <div className={open === 2 ? "acordeon show" : "acordeon"}>
+            <div className="header-acordeon">
+              <h2>Términos y condiciones</h2>
+              <button onClick={() => handleOpen(2)}>
+                {open === 2 ? (
+                  <ion-icon name="caret-up-outline"></ion-icon>
+                ) : (
+                  <ion-icon name="caret-down-outline"></ion-icon>
+                )}
+              </button>
+            </div>
+            <div className="body-acordeon">
+              <p>
+                La disponibilidad, precios y promociones pueden variar en
+                almacenes, domicilios y www.elmundodeloslibros.com.co . Oferta
+                válida el día 23 de Octubre de 2022 | 2 unidades totales
+                disponibles en www.elmundodeloslibros.com.co | No acumulables
+                con otras promociones | Aplica para referencias seleccionadas |
+                Los elementos de ambientación no forman parte de los productos |
+                Las fotografías no representan el tamaño real de los productos |
+                Máximo 2 unidades por cliente y por factura en productos de
+                tecnología | Para las ofertas de tecnología solo se permite la
+                compra diaria de máximo 2 unidades de una misma referencia por
+                cédula y/o dirección
+              </p>
+            </div>
+          </div>
         </div>
-        <div className="cont-carrusel">
+        {/*<div className="cont-carrusel">
           <h2>TE PODRIA INTERESAR</h2>
-        </div>
+        </div>*/}
       </div>
       <Footer />
     </div>

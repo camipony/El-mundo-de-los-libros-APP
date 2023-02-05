@@ -31,7 +31,7 @@ class FavoritesView(APIView):
         
     def get_object_by(self, dato):
         try:
-            return Favorites.objects.filter(identification=dato)
+            return Favorites.objects.get(pk=dato)
         except Favorites.DoesNotExist:
             raise Http404
     
@@ -69,7 +69,29 @@ class CartView(APIView):
         serializer = CartSerializer(post, many=True)
         return Response(serializer.data) 
 
+class ItemView(APIView):
+    def get_cart(self, id):
+        try:
+            return Cart.objects.filter(identification = id)
+        except Cart.DoesNotExist:
+            raise Http404
+        
+    def post(self, request, format=None):
+        dataRest = request.data
+        post = self.get_cart(dataRest["id_usuario"])
+        print(post[0])
+        serializer = ItemCartSerializer(data = {
+            "id_cart": post[0].id_cart,
+            "id_book": dataRest["codigo"]
+        })
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+
 class ItemCartView(APIView):
+        
     def get_items(self, id_cart):
         try:
             return Item_cart.objects.filter(id_cart = id_cart)
@@ -155,5 +177,3 @@ class PurchasedBookView(APIView):
         post = self.get_object_by_book(pk, codigo)
         serializer = PurchasedBooksSerializer(post, many=True)
         return Response(serializer.data)
-
-

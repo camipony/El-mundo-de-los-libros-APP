@@ -3,9 +3,11 @@ import {
   OBTENER_BOOK,
   CREAR_BOOK,
   OBTENER_BOOKS,
-  ACTUALIZAR_BOOK,
   GET_BOOK_FAVORITES,
   GET_BOOK_ADQUIRIDOS,
+  DELETE_FAVORITES,
+  ADD_FAVORITES,
+  PAY,
 } from "../type";
 
 export default (state, action) => {
@@ -15,23 +17,38 @@ export default (state, action) => {
     case OBTENER_BOOKS:
       return {
         ...state,
-        books: payload
-      }
+        books: payload,
+      };
     case OBTENER_BOOK:
       return {
         ...state,
-        book: payload
-      }
+        book: payload,
+      };
     case GET_BOOK_FAVORITES:
       return {
         ...state,
-        favoriteBooks: payload
-      }
+        favoriteBooks: payload,
+      };
     case GET_BOOK_ADQUIRIDOS:
       return {
         ...state,
-        purchasedBooks: payload
-      }
+        purchasedBooks: payload,
+      };
+    case DELETE_FAVORITES:
+      return {
+        ...state,
+        favoriteBooks: state.favoriteBooks.filter(fav => fav.codogo === payload),
+      };
+    case ADD_FAVORITES:
+      return {
+        ...state,
+        favoriteBooks: [...state.favoriteBooks, payload],
+      };
+    case PAY:
+      return {
+        ...state,
+        purchasedBooks: state.purchasedBooks,
+      };
     default:
       return state;
   }

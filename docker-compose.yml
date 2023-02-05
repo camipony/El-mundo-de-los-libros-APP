@@ -1,0 +1,42 @@
+version: '3'
+services:
+  user_services:
+    container_name: user_services
+    restart: always
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=123
+      - POSTGRES_DB=supermarket_db
+      - POSTGRES_USER=supermarket
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+  pgadmin:
+    container_name: pgadmin4_container_pos
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=camibonbu@gmail.com
+      - PGADMIN_DEFAULT_PASSWORD=12345
+    volumes:
+      - ./pg:/var/lib/postgresql/data
+    ports:
+      - 5050:80
+  supermarket_ms:
+    container_name: supermarket_ms
+    restart: always
+    ports:
+      - 5000:5000
+    build: ./supermarket_ms
+    environment:
+      DB_HOST: supermarket_db
+      DB_PORT: 5432
+      DB_USER: supermarket
+      DB_PASSWORD: 123
+      DB_NAME: supermarket_db
+      URL: 0.0.0.0:5000
+    depends_on:
+      - supermarket_db
+    links:
+    - supermarket_db

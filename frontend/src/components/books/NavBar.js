@@ -45,25 +45,25 @@ const NavBar = () => {
    
     <nav className="md:col-span-6 flex items-center">
         <a
+            href="/"
+            className="xl:py-1 xl:px-2 rounded-lg hover:bg-gray-100 transition-colors"
+        >
+            Inicio
+        </a>
+        <a
             href="/books"
             className="xl:py-1 xl:px-2 rounded-lg hover:bg-gray-100 transition-colors"
         >
             Libros
         </a>
         <a
-            href="/promos"
-            className="xl:py-1 xl:px-2 rounded-lg hover:bg-gray-100 transition-colors"
-        >
-            Promociones
-        </a>
-        <a
-            href="/colecc"
+            href="/ferias"
             className="xl:py-1 xl:px-2 rounded-lg hover:bg-gray-100 transition-colors"
         >
             Ferias
         </a>
         <a
-            href="/contact-us"
+            href="/contact"
             className="xl:py-1 xl:px-2 rounded-lg hover:bg-gray-100 transition-colors"
         >
             Contáctanos

@@ -2,6 +2,7 @@ import "tailwindcss/tailwind.css";
 import React, {useContext, useState, useEffect } from "react";
 import logo from "../../assets/logo_mdl.png";
 import "../../css/register.css";
+import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import UsuariosContext from "../../context/Usuario/usuariosContext";
 
@@ -22,18 +23,44 @@ const Register = () => {
   const onClick = (e) => {
     e.preventDefault();
     crearUsuario(user);
-    if(datosUsuario.token) {
-      navigate("/");
-    }
+    Swal.fire({
+      title: "verifying the information",
+      html: "Espera un momento validamos tu información",
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: () => {
+        Swal.showLoading();
+      }
+    }).then((result) => {
+      validar()
+      if (datosUsuario.token) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Bienvenido',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        navigate("/dashboard");
+      } 
+    });
   };
 
-  useEffect(() => {
-    verificarInicioSesion()
-    if(datosUsuario.token) {
-      navigate("/");
+  const validar = () => {
+    if (!datosUsuario.token)  verificarInicioSesion();
+    else {
+      Swal.fire({
+        icon: 'success',
+        title: 'Bienvenido',
+        showConfirmButton: false,
+        timer: 1500
+      })
+      navigate("/dashboard");
     }
-    return;
-  }, [datosUsuario]);
+  }
+
+  useEffect(() => {
+    validar()
+  }, [[]]);
 
 
   const handleChange = ({ target: { name, value } }) =>

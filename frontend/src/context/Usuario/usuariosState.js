@@ -24,7 +24,7 @@ const UsuariosState = (props) => {
 
   const inicialState = {
     datosUsuario: {},
-    carrito: [],
+    carrito: {},
   };
 
   const [state, dispatch] = useReducer(usuariosReducer, inicialState);
@@ -35,6 +35,7 @@ const UsuariosState = (props) => {
       if (resp.data.token) {
         let user = await axios.get(ruta + "/user/" + datos.username + "/");
         resp.data.user = user.data[0];
+        console.log(resp.data)
         window.localStorage.setItem("user-token", JSON.stringify(resp.data));
         dispatch({
           type: "AUTENTICAR_USUARIO",
@@ -43,7 +44,7 @@ const UsuariosState = (props) => {
       } else {
         dispatch({
           type: "AUTENTICAR_USUARIO",
-          payload: [],
+          payload: {},
         });
       }
     } catch (e) {
@@ -62,16 +63,22 @@ const UsuariosState = (props) => {
 
   const cerrarSesion = () => {
     try {
+      console.log("Cerrando sesion")
       window.localStorage.removeItem("user-token");
+      window.sessionStorage.removeItem("user-token");
+      dispatch({
+        type: "AUTENTICAR_USUARIO",
+        payload: {},
+      });
     } catch (error) {
       console.log(error);
     }
-    state.datosUsuario = [];
   };
 
   const crearUsuario = async (datos) => {
     try {
       const resp = await axios.post(ruta + "/register/", datos);
+      console.log(datos)
       window.localStorage.setItem("user-token", JSON.stringify(resp.data));
       dispatch({
         type: "CREAR_USUARIO",
@@ -121,6 +128,34 @@ const UsuariosState = (props) => {
     }
   };
 
+  const addBookCart = async (user, book) => {
+    try {
+      let item = {
+        id_usuario: user,
+        codigo: book.codigo
+      }
+      let data = await axios.post(ruta+'/item/', item)
+      dispatch({
+        type: "ADD_CARRITO",
+        payload: book
+      });
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const deleteBookCart = async (item) => {
+    try {
+      let data = await axios.delete(ruta+'/item/'+item+'/')
+      dispatch({
+        type: "DELETE_CARRITO",
+        payload: item
+      });
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <UsuariosContext.Provider
       value={{
@@ -129,7 +164,9 @@ const UsuariosState = (props) => {
         cerrarSesion,
         saveAutenticarUsuario,
         crearUsuario,
-        getcarrito
+        getcarrito,
+        addBookCart,
+        deleteBookCart
       }}
     >
       {props.children}

@@ -13,8 +13,7 @@ const Login = () => {
   });
 
   let usersContext = useContext(UsuariosContext);
-  let { datosUsuario, verificarInicioSesion, saveAutenticarUsuario } =
-    usersContext;
+  let { datosUsuario, verificarInicioSesion, saveAutenticarUsuario } = usersContext;
 
   const navigate = useNavigate();
 
@@ -23,49 +22,47 @@ const Login = () => {
 
   const onClick = (e) => {
     e.preventDefault();
-    console.log("Click")
+    console.log("Click");
     saveAutenticarUsuario(user);
-    let timerInterval;
+    console.log(datosUsuario)
     Swal.fire({
       title: "verifying the information",
       html: "Espera un momento validamos tu información",
-      timer: 2000,
+      timer: 3000,
       timerProgressBar: true,
       didOpen: () => {
         Swal.showLoading();
-        /*const b = Swal.getHtmlContainer().querySelector("b");
-        timerInterval = setInterval(() => {
-          b.textContent = Swal.getTimerLeft();
-        }, 100);*/
-      },
-      willClose: () => {
-        clearInterval(timerInterval);
-      },
+      }
     }).then((result) => {
+      validar()
       if (datosUsuario.token) {
         Swal.fire({
           icon: 'success',
           title: 'Bienvenido',
-          text: ''
+          showConfirmButton: false,
+          timer: 1500
         })
         navigate("/dashboard");
-      }
-      else {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'User not found'
-        })
-      }
+      } 
     });
   };
 
-  useEffect(() => {
-    verificarInicioSesion();
-    if (datosUsuario.token) {
+  const validar = () => {
+    if (!datosUsuario.token)  verificarInicioSesion();
+    else {
+      Swal.fire({
+        icon: 'success',
+        title: 'Bienvenido',
+        showConfirmButton: false,
+        timer: 1500
+      })
       navigate("/dashboard");
     }
-  }, []);
+  }
+
+  useEffect(() => {
+    validar()
+  }, [[]]);
 
   return (
     <div className="min-h-screen bg-[#252831] grid grid-cols-1 lg:grid-cols-2">
@@ -75,24 +72,10 @@ const Login = () => {
           <h1 className="text-4xl font-medium">Iniciar sesión</h1>
         </div>
 
-        <div className="w-full">
-          <button
-            type="button"
-            className="w-full flex items-center justify-center gap-2 border p-2 px-4 rounded-full"
-          >
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/281/281764.png"
-              width="20"
-              height="20"
-            />
-            <span className="ml-2">Ingresar con Google</span>
-          </button>
-        </div>
-
         <form className="flex flex-col gap-4">
           <div>
             <label htmlFor="username" className="text-gray-200">
-              Correo electrónico *
+              identificacion *
             </label>
             <input
               type="text"
@@ -122,17 +105,17 @@ const Login = () => {
             <span className="text-gray-400">
               ¿No tienes cuenta?{" "}
               <a
-                href="#"
+                href="/register"
                 className="text-indigo-400 hover:text-indigo-500 transition-colors"
               >
                 Registrate
               </a>
             </span>
             <a
-              href="#"
+              href="/"
               className="text-gray-400 hover:text-gray-200 transition-colors"
             >
-              ¿Olvidaste tu contraseña?
+              Volver al inicio
             </a>
           </div>
           <div className="mt-4 order-1 md:order-2">

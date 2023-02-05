@@ -6,6 +6,9 @@ import Register from "../pages/user/Register";
 import HomeGeneral from "../pages/HomeGeneral";
 import DetailtBook from "../pages/user/detailtBook";
 import { ProtectedRoute } from "../pages/user/ProtectedRoute";
+import ContactUs from "../pages/books/ContactUs";
+import Store from "../pages/Store";
+
 
 function App() {
   return (
@@ -13,7 +16,6 @@ function App() {
       <Routes>
         <Route
           path="/dashboard"
-          
           element={
             <ProtectedRoute>
               <Home />
@@ -23,7 +25,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/home" element={<HomeGeneral />} />
-        <Route path="/books" element={<HomeGeneral />} />
+        <Route path="/books" element={<Store />} />
+        <Route path="/contact" element={<ContactUs/>}/>
         <Route path="/books/:codigobook" element={<DetailtBook />} />
         <Route path="/" element={<HomeGeneral />} />
       </Routes>
